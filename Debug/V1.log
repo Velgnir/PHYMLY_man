@@ -1,0 +1,4 @@
+﻿  Source.cpp
+C:\Users\HOME\source\repos\V1\Source.cpp(8,10): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+C:\Users\HOME\source\repos\V1\Source.cpp(10,9): warning C4244: return: преобразование "float" в "int", возможна потеря данных
+  V1.vcxproj -> C:\Users\HOME\source\repos\V1\Debug\V1.exe
