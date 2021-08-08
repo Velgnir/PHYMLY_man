@@ -22,3 +22,7 @@ unistd.h
 visualization.hpp
 /home/paulo/PHYMLY_man/visualization.hpp
 
+/home/paulo/PHYMLY_man/src/visualization.cpp
+visualization.hpp
+/home/paulo/PHYMLY_man/src/visualization.hpp
+
