@@ -13,7 +13,7 @@ void C_to_rgb(const double temp_here, int &r, int &g, int &b) {
     } else if (temp_here < 30) {
         r = 0;
         g = 255;
-        b = (size_t) (2.55 * (temp_here + 70));
+        b = (size_t) (2.55 * abs(temp_here - 30));
     } else if (temp_here < 130) {
         r = (size_t) (2.55 * (temp_here - 30));
         g = 255;
