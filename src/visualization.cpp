@@ -4,7 +4,7 @@
 
 #include "visualization.hpp"
 
-void C_to_rgb(const double Temperature, int &r, int &g, int &b, const double Temperature_limit) {
+void C_to_rgb(const double Temperature, uint8_t &r, uint8_t &g, uint8_t &b, const double Temperature_limit) {
     //0(blue)  --  biggest/4(sky-blue)  --  biggest*2/4(green)  --  biggest*3/4(yellow) -- biggest(red)
     if (Temperature+273 < (Temperature_limit+273)/4){
         r = 0;
@@ -29,7 +29,7 @@ void draw(const int rows, const int colums, double matrix[100][100],
           sf::RenderWindow& window,
           sf::RectangleShape picture[100][100],
           const double temperature_limit){
-    int r,g,b;
+    uint8_t r,g,b;
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < colums; ++j) {
             C_to_rgb(matrix[i][j], r,g,b, temperature_limit);
