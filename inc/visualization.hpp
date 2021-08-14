@@ -3,6 +3,13 @@
 //
 
 #include <iostream>
+#include <math.h>
+#include <SFML/Graphics.hpp>
 
-void C_to_rgb(const double temp_here, int &r, int &g, int &b);
+void C_to_rgb(const double Temperature, int &r, int &g, int &b, const double Temperature_limit);
+
+void draw(const int rows, const int colums, double matrix[100][100],
+          sf::RenderWindow& window,
+          sf::RectangleShape picture[100][100],
+          const double temperature_limit);
 
