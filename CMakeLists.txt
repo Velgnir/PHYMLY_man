@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 
 #change project name here!
-set(PROJECT_NAME test)
+set(PROJECT_NAME phymly_man)
 project(${PROJECT_NAME} CXX)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -27,7 +27,7 @@ endif()
 include(cmake/config.cmake)
 
 # Include headers
-include_directories(inc)
+include_directories(include)
 
 # Project source compilation
 add_executable(${PROJECT_NAME} src/main.cpp)

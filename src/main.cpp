@@ -5,7 +5,8 @@
 #include <iostream>
 #include <fstream>
 #include <filesystem>
-#include "../include/files/config_file.h"
+#include "files/config_file.h"
+#include "options_parser.h"
 
 
 int main(int argc, char *argv[]) {
