@@ -1,24 +1,36 @@
-#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <fstream>
-#include "visualization.hpp"
+#include <boost/program_options.hpp>
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <filesystem>
+#include "../include/files/config_file.h"
+
 
 int main(int argc, char *argv[]) {
 
-    std::string file_path;
+    std::string file_path = "../";
+    std::string input_file_name;
+    std::string config_file_name;
     if (argc > 1) {
-        file_path = argv[2];
+        input_file_name = argv[2];
+        config_file_name = argv[3];
     } else {
-        file_path = "input.txt";
+        input_file_name = "input.txt";
+        config_file_name = "config.conf";
     }
     double First_matrix[100][100];
+
+    ConfigFileOpt config;
+    config.parse(file_path+config_file_name);
     /*
     int lx = 1, ly = 1;
     double dX = 0.01, dY = 0.01;
      */
     int all_time = 10000;
     double dT = 0.1;
-    std::ifstream input_file(file_path);
+    std::ifstream input_file(file_path+input_file_name);
     if (input_file) {
         std::cout << "file was open" << std::endl;
     } else {
@@ -48,14 +60,6 @@ int main(int argc, char *argv[]) {
             if (number>temperature_limit)
                 temperature_limit = number;
 
-    sf::RenderWindow window(sf::VideoMode(100, 100), "2D Heat");
-    sf::RectangleShape picture[100][100];
-    for (int i = 0; i < 100; ++i) {
-        for (int j = 0; j < 100; ++j) {
-            picture[i][j].setPosition(sf::Vector2f(j, i));
-            picture[i][j].setSize(sf::Vector2f(1, 1));
-        }
-    }
     for (int h = 0; h < all_time * 10; ++h) {
         for (int i = 1; i < 100; ++i) {
             for (int j = 1; j < 100; ++j) {
@@ -75,9 +79,7 @@ int main(int argc, char *argv[]) {
             }
         }
         if (h%100==0) {
-            window.clear();
-            draw(100,100, matrix,window,picture,temperature_limit);
-            /*for (int j = 0; j < 100; ++j) {
+            /*TODO for (int j = 0; j < 100; ++j) {
                 for (int k = 0; k < 100; ++k) {
                     all_matrix_for_gif[j][k][(h / 100)] = matrix[j][k];
                 }
