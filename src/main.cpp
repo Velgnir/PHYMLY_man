@@ -11,7 +11,6 @@
 
 int main(int argc, char *argv[]) {
 
-    std::string file_path = "../";
     std::string input_file_name;
     std::string config_file_name;
     if (argc > 1) {
@@ -22,16 +21,19 @@ int main(int argc, char *argv[]) {
         config_file_name = "config.conf";
     }
     double First_matrix[100][100];
-
-    ConfigFileOpt config;
-    config.parse(file_path+config_file_name);
+    if ((!std::filesystem::exists("input.txt")) || (!std::filesystem::exists("config.conf"))){
+        return -1;
+    } else {
+        ConfigFileOpt config;
+        config.parse(config_file_name);
+    }
     /*
     int lx = 1, ly = 1;
     double dX = 0.01, dY = 0.01;
      */
     int all_time = 10000;
     double dT = 0.1;
-    std::ifstream input_file(file_path+input_file_name);
+    std::ifstream input_file(input_file_name);
     if (input_file) {
         std::cout << "file was open" << std::endl;
     } else {

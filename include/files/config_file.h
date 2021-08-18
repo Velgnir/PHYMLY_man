@@ -11,7 +11,7 @@
 #include <fstream>
 
 
-#include "../exceptions/parser_exeption.h"
+#include "exceptions/parser_exeption.h"
 
 class ConfigFileOpt {
 public:

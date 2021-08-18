@@ -3,7 +3,7 @@
 //
 
 #include <filesystem>
-#include "../../include/files/config_file.h"
+#include "files/config_file.h"
 
 namespace po = boost::program_options;
 
