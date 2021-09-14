@@ -1,32 +1,21 @@
 #include <iostream>
 #include <fstream>
-#include <boost/program_options.hpp>
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <filesystem>
-#include "files/config_file.h"
-#include "options_parser.h"
 
 
 int main(int argc, char *argv[]) {
-
     std::string input_file_name;
-    std::string config_file_name;
     if (argc > 1) {
         input_file_name = argv[2];
-        config_file_name = argv[3];
     } else {
         input_file_name = "input.txt";
-        config_file_name = "config.conf";
     }
     double First_matrix[100][100];
-    if ((!std::filesystem::exists("input.txt")) || (!std::filesystem::exists("config.conf"))){
+    if ((!std::filesystem::exists("input.txt")))
         return -1;
-    } else {
-        ConfigFileOpt config;
-        config.parse(config_file_name);
-    }
     /*
     int lx = 1, ly = 1;
     double dX = 0.01, dY = 0.01;
@@ -56,7 +45,6 @@ int main(int argc, char *argv[]) {
     double k1 = (alpha * dT) / (dx * dx);
     double k2 = (alpha * dT) / (dy * dy);
     double temperature_limit;
-    //double all_matrix_for_gif[100][100][100];
 
     for (auto &line:matrix)
         for (auto number:line)
@@ -64,29 +52,45 @@ int main(int argc, char *argv[]) {
                 temperature_limit = number;
 
     for (int h = 0; h < all_time * 10; ++h) {
-        for (int i = 1; i < 100; ++i) {
+        for (int i = 0; i < 100; ++i) {
             for (int j = 1; j < 100; ++j) {
-                matrix[i][j] = First_matrix[i][j] +
-                               (k1 * (First_matrix[i + 1][j] + First_matrix[i - 1][j] - 2 * First_matrix[i][j])) +
-                               (k2 * (First_matrix[i][j + 1] + First_matrix[i][j - 1] - 2 * First_matrix[i][j]));
+                if (i == 0 && j == 99){
+                    matrix[i][j] = First_matrix[i][j] +
+                                   (k1 * (First_matrix[i + 1][j] - First_matrix[i][j])) +
+                                   (k2 * (First_matrix[i][j - 1] - First_matrix[i][j]));
+
+                } else if (i == 99 && j== 99){
+                    matrix[i][j] = First_matrix[i][j] +
+                                   (k1 * (First_matrix[i - 1][j] - First_matrix[i][j])) +
+                                   (k2 * (First_matrix[i][j - 1] - First_matrix[i][j]));
+
+                } else if (i == 0){
+                   matrix[i][j] = First_matrix[i][j] +
+                                  (k1 * (First_matrix[i + 1][j] - First_matrix[i][j])) +
+                                  (k2 * (First_matrix[i][j + 1] + First_matrix[i][j - 1] - 2 * First_matrix[i][j]));
+
+               } else if (i == 99){
+                    matrix[i][j] = First_matrix[i][j] +
+                                   (k1 * (First_matrix[i - 1][j] - First_matrix[i][j])) +
+                                   (k2 * (First_matrix[i][j - 1] - First_matrix[i][j]));
+
+                }else if (j == 99){
+                   matrix[i][j] = First_matrix[i][j] +
+                                  (k1 * (First_matrix[i + 1][j] + First_matrix[i - 1][j] - 2 * First_matrix[i][j])) +
+                                  (k2 * (First_matrix[i][j - 1] - First_matrix[i][j]));
+
+               } else {
+                    matrix[i][j] = First_matrix[i][j] +
+                                   (k1 * (First_matrix[i + 1][j] + First_matrix[i - 1][j] - 2 * First_matrix[i][j])) +
+                                   (k2 * (First_matrix[i][j + 1] + First_matrix[i][j - 1] - 2 * First_matrix[i][j]));
+                }
             }
-            for (int j = 0; j < 100; ++j) {
-                matrix[j][99] = matrix[j][98];
-                matrix[0][j] = matrix[1][j];
-                matrix[99][j] = matrix[98][j];
-            }
+
         }
         for (int j = 0; j < 100; ++j) {
             for (int k = 0; k < 100; ++k) {
                 First_matrix[j][k] = matrix[j][k];
             }
-        }
-        if (h%100==0) {
-            /*TODO for (int j = 0; j < 100; ++j) {
-                for (int k = 0; k < 100; ++k) {
-                    all_matrix_for_gif[j][k][(h / 100)] = matrix[j][k];
-                }
-            }*/
         }
         std::cout << "time " << (h / 10) << "." << h % 10 << " s" << std::endl;
 
