@@ -4,7 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <filesystem>
-
+#include "formula.hpp"
 
 int main(int argc, char *argv[]) {
     std::string input_file_name;
@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
     int lx = 1, ly = 1;
     double dX = 0.01, dY = 0.01;
      */
-    int all_time = 10000;
+    int all_time = 6000;
     double dT = 0.1;
     std::ifstream input_file(input_file_name);
     if (input_file) {
@@ -54,38 +54,8 @@ int main(int argc, char *argv[]) {
     for (int h = 0; h < all_time * 10; ++h) {
         for (int i = 0; i < 100; ++i) {
             for (int j = 1; j < 100; ++j) {
-                if (i == 0 && j == 99){
-                    matrix[i][j] = First_matrix[i][j] +
-                                   (k1 * (First_matrix[i + 1][j] - First_matrix[i][j])) +
-                                   (k2 * (First_matrix[i][j - 1] - First_matrix[i][j]));
-
-                } else if (i == 99 && j== 99){
-                    matrix[i][j] = First_matrix[i][j] +
-                                   (k1 * (First_matrix[i - 1][j] - First_matrix[i][j])) +
-                                   (k2 * (First_matrix[i][j - 1] - First_matrix[i][j]));
-
-                } else if (i == 0){
-                   matrix[i][j] = First_matrix[i][j] +
-                                  (k1 * (First_matrix[i + 1][j] - First_matrix[i][j])) +
-                                  (k2 * (First_matrix[i][j + 1] + First_matrix[i][j - 1] - 2 * First_matrix[i][j]));
-
-               } else if (i == 99){
-                    matrix[i][j] = First_matrix[i][j] +
-                                   (k1 * (First_matrix[i - 1][j] - First_matrix[i][j])) +
-                                   (k2 * (First_matrix[i][j - 1] - First_matrix[i][j]));
-
-                }else if (j == 99){
-                   matrix[i][j] = First_matrix[i][j] +
-                                  (k1 * (First_matrix[i + 1][j] + First_matrix[i - 1][j] - 2 * First_matrix[i][j])) +
-                                  (k2 * (First_matrix[i][j - 1] - First_matrix[i][j]));
-
-               } else {
-                    matrix[i][j] = First_matrix[i][j] +
-                                   (k1 * (First_matrix[i + 1][j] + First_matrix[i - 1][j] - 2 * First_matrix[i][j])) +
-                                   (k2 * (First_matrix[i][j + 1] + First_matrix[i][j - 1] - 2 * First_matrix[i][j]));
-                }
+                matrix[i][j] = get_formula_result(i,j,First_matrix,k1,k2);
             }
-
         }
         for (int j = 0; j < 100; ++j) {
             for (int k = 0; k < 100; ++k) {
