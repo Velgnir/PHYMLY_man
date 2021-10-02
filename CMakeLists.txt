@@ -20,7 +20,7 @@ include(cmake/config.cmake)
 include_directories(include)
 
 # Project source compilation
-add_executable(${PROJECT_NAME} src/main.cpp)
+add_executable(${PROJECT_NAME} src/main.cpp src/formula.cpp src/files/config_file.cpp)
 
 # Add external packages
 find_package(Boost 1.71.0 COMPONENTS program_options REQUIRED)

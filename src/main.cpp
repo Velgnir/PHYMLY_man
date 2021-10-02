@@ -5,8 +5,18 @@
 #include <fstream>
 #include <filesystem>
 #include "formula.hpp"
+#include "files/config_file.h"
+
+ConfigFileOpt parse_args(int argc, char **argv);
+
+//void assert_valid_config(const ConfigFileOpt &conf);
 
 int main(int argc, char *argv[]) {
+
+    ConfigFileOpt config = parse_args(argc, argv);
+//    assert_valid_config(config);
+    std::cout << config.get_field_filename() << std::endl;
+
     std::string input_file_name;
     if (argc > 1) {
         input_file_name = argv[2];
@@ -74,3 +84,44 @@ int main(int argc, char *argv[]) {
     }
     return 0;
 }
+
+ConfigFileOpt parse_args(int argc, char **argv) {
+    //  ##################### Program Parameter Parsing ######################
+    std::string filename = "config.conf";
+    if (argc == 2) {
+        filename = argv[1];
+    } else if (argc > 2) {
+        std::cerr << "Too many arguments. Usage: \n"
+                     "\tprogram [config-filename]\n" << std::endl;
+        exit(1);
+    }
+    //  #####################    Config File Parsing    ######################
+    ConfigFileOpt config;
+    try {
+        config.parse(filename);
+    } catch (std::exception &ex) {
+        std::cerr << "Error: " << ex.what() << std::endl;
+        exit(3);
+    }
+    return config;
+}
+
+//void assert_valid_config(const ConfigFileOpt &config) {
+
+//    if (!std::filesystem::exists(config.get_field_filename())) {
+//        std::cerr << "Error: File or Directory '" << config.get_field_filename()
+//                  << "' do not exist (or can not be created)!"
+//                  << std::endl;
+//        exit(21);
+//    } else if (config.get_field_filename().empty()) {
+//        std::cerr << "Error: Field file is empty or missing field file filename!" << std::endl;
+//        exit(23);
+//    } else if (config.get_delta_t() >=
+//               std::pow(std::max(config.get_delta_x(), config.get_delta_y()), 2) / config.get_alpha() / 4) {
+//        std::cerr << "Error: Violation of the Von Neumann criteria for input data." << std::endl;
+//        exit(23);
+//    } else if (config.get_width() < 1000 or config.get_height() < 1000) {
+//        std::cerr << "Error: field must be at least 1000*1000" << std::endl;
+//        exit(23);
+//    }
+//}
