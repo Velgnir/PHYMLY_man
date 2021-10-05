@@ -12,32 +12,43 @@ ConfigFileOpt parse_args(int argc, char **argv);
 //void assert_valid_config(const ConfigFileOpt &conf);
 
 int main(int argc, char *argv[]) {
-
-    ConfigFileOpt config = parse_args(argc, argv);
-//    assert_valid_config(config);
-    std::cout << config.get_field_filename() << std::endl;
-
     std::string input_file_name;
-    if (argc > 1) {
+    std::string config_file_name;
+    if (argc > 2) {
         input_file_name = argv[2];
+        config_file_name = argv[3];
     } else {
         input_file_name = "input.txt";
+        config_file_name = "config.conf";
     }
-    double First_matrix[100][100];
-    if ((!std::filesystem::exists("input.txt")))
+//    assert_valid_config(config);
+
+    if ((!std::filesystem::exists(input_file_name))) {
+        std::cerr << "File " << input_file_name << " wasn't found" << std::endl;
         return -1;
-    /*
-    int lx = 1, ly = 1;
-    double dX = 0.01, dY = 0.01;
-     */
-    int all_time = 6000;
-    double dT = 0.1;
+    }
+    ConfigFileOpt config = parse_args(argc, argv);
+    if ((!std::filesystem::exists(config_file_name))) {
+        std::cerr << "File " << config_file_name << " wasn't found" << std::endl;
+        return -1;
+    }
+    int all_time = 600;
     std::ifstream input_file(input_file_name);
     if (input_file) {
         std::cout << "file was open" << std::endl;
     } else {
         std::cout << "file wasn't open" << std::endl;
     }
+    double dT = config.get_delta_t();
+    double dx = config.get_delta_x();
+    double dy = config.get_delta_y();
+    double alpha = config.get_alpha();
+    double k1 = (alpha * dT) / (dx * dx);
+    double k2 = (alpha * dT) / (dy * dy);
+    double temperature_limit;
+    //int lx = config.get_width()/dx;
+    //int ly = config.get_height()/dy;
+    double First_matrix[100][100];
     for (auto &line: First_matrix)
         for (auto &number: line)
             input_file >> number;
@@ -49,19 +60,12 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    double dx = 0.01010101010101;
-    double dy = dx;
-    double alpha = 0.000244;
-    double k1 = (alpha * dT) / (dx * dx);
-    double k2 = (alpha * dT) / (dy * dy);
-    double temperature_limit;
-
     for (auto &line:matrix)
         for (auto number:line)
             if (number>temperature_limit)
                 temperature_limit = number;
 
-    for (int h = 0; h < all_time * 10; ++h) {
+    for (int h = 0; h < all_time * (1/dT); ++h) {
         for (int i = 0; i < 100; ++i) {
             for (int j = 1; j < 100; ++j) {
                 matrix[i][j] = get_formula_result(i,j,First_matrix,k1,k2);
@@ -72,8 +76,6 @@ int main(int argc, char *argv[]) {
                 First_matrix[j][k] = matrix[j][k];
             }
         }
-        std::cout << "time " << (h / 10) << "." << h % 10 << " s" << std::endl;
-
     }
 
 
