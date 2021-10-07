@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 # Options
 option(WARNINGS_AS_ERRORS "Treat compiler warnings as errors." ON)
-option(ENABLE_PVS_STUDIO "Check using command-line PVS-Studio." ON)
+option(ENABLE_PVS_STUDIO "Check using command-line PVS-Studio." OFF)
 option(ENABLE_SANITIZERS    "Use sanitizers to detect errors." OFF) # Option for the test builds. Do not use it in the production builds.
 
 # Set output directories
@@ -20,7 +20,7 @@ include(cmake/config.cmake)
 include_directories(include)
 
 # Project source compilation
-add_executable(${PROJECT_NAME} src/main.cpp src/formula.cpp src/files/config_file.cpp)
+add_executable(${PROJECT_NAME} src/main.cpp src/formula.cpp src/files/config_file.cpp src/visualization.cpp)
 
 # Add external packages
 find_package(Boost 1.71.0 COMPONENTS program_options REQUIRED)
@@ -31,3 +31,15 @@ target_link_libraries(${PROJECT_NAME} Boost::program_options)
 set_target_properties(${PROJECT_NAME}
 						PROPERTIES
 						RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+
+set(YOU_NEED_X11 1)
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+set(YOU_NEED_PNG 1)
+
+find_package(X11 REQUIRED)
+include_directories(${X11_INCLUDE_DIR})
+target_link_libraries(${PROJECT_NAME} ${X11_LIBRARIES})
+find_package(PNG REQUIRED)
+include_directories(${PNG_INCLUDE_DIR})
+target_link_libraries (${PROJECT_NAME} ${PNG_LIBRARY})
+target_compile_definitions(${PROJECT_NAME} PRIVATE cimg_use_png=1)

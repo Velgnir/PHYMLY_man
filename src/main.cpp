@@ -6,6 +6,10 @@
 #include <filesystem>
 #include "formula.hpp"
 #include "files/config_file.h"
+#include "CImg.h"
+#include "visualization.hpp"
+
+using namespace cimg_library;
 
 ConfigFileOpt parse_args(int argc, char **argv);
 
@@ -46,8 +50,13 @@ int main(int argc, char *argv[]) {
     double k1 = (alpha * dT) / (dx * dx);
     double k2 = (alpha * dT) / (dy * dy);
     double temperature_limit;
+
+
     //int lx = config.get_width()/dx;
     //int ly = config.get_height()/dy;
+    CImg<unsigned char> img(100,100,1,3);
+    char filename[128];
+    uint8_t r,g,b;
     double First_matrix[100][100];
     for (auto &line: First_matrix)
         for (auto &number: line)
@@ -69,6 +78,12 @@ int main(int argc, char *argv[]) {
         for (int i = 0; i < 100; ++i) {
             for (int j = 1; j < 100; ++j) {
                 matrix[i][j] = get_formula_result(i,j,First_matrix,k1,k2);
+                if (h % 100 == 0) {
+                    C_to_rgb(matrix[i][j], r,g,b, temperature_limit);
+                    img(j, i, 0, 0) = r;
+                    img(j, i, 0, 1) = g;
+                    img(j, i, 0, 2) = b;
+                }
             }
         }
         for (int j = 0; j < 100; ++j) {
@@ -76,8 +91,11 @@ int main(int argc, char *argv[]) {
                 First_matrix[j][k] = matrix[j][k];
             }
         }
+        if (h % 100 == 0) {
+            sprintf(filename, "images/f-%06d.png", h / 100);
+            img.save_png(filename);
+        }
     }
-
 
     for (auto &line: matrix) {
         for (auto number: line)
