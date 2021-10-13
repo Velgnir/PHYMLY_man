@@ -9,7 +9,7 @@
 #include "CImg.h"
 #include "visualization.hpp"
 
-using namespace cimg_library;
+namespace cimg = cimg_library;
 
 ConfigFileOpt parse_args(int argc, char **argv);
 
@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
 
     //int lx = config.get_width()/dx;
     //int ly = config.get_height()/dy;
-    CImg<unsigned char> img(100,100,1,3);
+    cimg::CImg<unsigned char> img(100,100,1,3);
     char filename[128];
     uint8_t r,g,b;
     double First_matrix[100][100];
