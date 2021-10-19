@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 #include <iostream>
 #include <fstream>
 #include <filesystem>
@@ -12,7 +13,6 @@
 namespace cimg = cimg_library;
 
 ConfigFileOpt parse_args(int argc, char **argv);
-
 //void assert_valid_config(const ConfigFileOpt &conf);
 
 int main(int argc, char *argv[]) {
@@ -47,24 +47,33 @@ int main(int argc, char *argv[]) {
     double dx = config.get_delta_x();
     double dy = config.get_delta_y();
     double alpha = config.get_alpha();
+    auto width = config.get_width();
+    auto height = config.get_height();
+    int size_z=1;
+    int number_of_colour_threads = 3;
     double k1 = (alpha * dT) / (dx * dx);
     double k2 = (alpha * dT) / (dy * dy);
     double temperature_limit;
-
-
-    //int lx = config.get_width()/dx;
-    //int ly = config.get_height()/dy;
-    cimg::CImg<unsigned char> img(100,100,1,3);
+    std::vector<std::vector<double>> matrix;
+    std::vector<std::vector<double>> First_matrix;
+    cimg::CImg<unsigned char> img(width,height,size_z,number_of_colour_threads);
     char filename[128];
     uint8_t r,g,b;
-    double First_matrix[100][100];
+
+    First_matrix.resize(height);
+    matrix.resize(height);
+    for (size_t i = 0; i < height; ++i) {
+        First_matrix[i].resize(width);
+        matrix[i].resize(width);
+    }
+
     for (auto &line: First_matrix)
         for (auto &number: line)
             input_file >> number;
-    double matrix[100][100];
 
-    for (int j = 0; j < 100; ++j) {
-        for (int k = 0; k < 100; ++k) {
+
+    for (size_t j = 0; j < width; ++j) {
+        for (size_t k = 0; k < height; ++k) {
             matrix[j][k] = First_matrix[j][k];
         }
     }
@@ -75,9 +84,9 @@ int main(int argc, char *argv[]) {
                 temperature_limit = number;
 
     for (int h = 0; h < all_time * (1/dT); ++h) {
-        for (int i = 0; i < 100; ++i) {
-            for (int j = 1; j < 100; ++j) {
-                matrix[i][j] = get_formula_result(i,j,First_matrix,k1,k2);
+        for (size_t i = 0; i < width; ++i) {
+            for (size_t j = 1; j < height; ++j) {
+                matrix[i][j] = get_formula_result(i,j,First_matrix,k1,k2,width,height);
                 if (h % 100 == 0) {
                     C_to_rgb(matrix[i][j], r,g,b, temperature_limit);
                     img(j, i, 0, 0) = r;
@@ -86,8 +95,8 @@ int main(int argc, char *argv[]) {
                 }
             }
         }
-        for (int j = 0; j < 100; ++j) {
-            for (int k = 0; k < 100; ++k) {
+        for (size_t j = 0; j < width; ++j) {
+            for (size_t k = 0; k < height; ++k) {
                 First_matrix[j][k] = matrix[j][k];
             }
         }
