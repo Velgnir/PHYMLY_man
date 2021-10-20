@@ -1,3 +1,7 @@
+// This is a personal academic project. Dear PVS-Studio, please check it.
+// // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
+
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -50,7 +54,7 @@ int main(int argc, char *argv[]) {
     double k1 = (alpha * dT) / (dx * dx);
     double k2 = (alpha * dT) / (dy * dy);
     double temperature_limit;
-
+	int a[config.get_width()] = {1, 2, 3, 4, 5};
 
     //int lx = config.get_width()/dx;
     //int ly = config.get_height()/dy;
