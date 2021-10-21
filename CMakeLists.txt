@@ -1,20 +1,21 @@
 cmake_minimum_required(VERSION 3.15)
 
-set(PROJECT_NAME test)
+set(PROJECT_NAME thermal_conductivity)
 project(${PROJECT_NAME} CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
 # Options
-option(WARNINGS_AS_ERRORS "Treat compiler warnings as errors." ON)
-option(ENABLE_PVS_STUDIO "Check using command-line PVS-Studio." OFF)
-option(ENABLE_SANITIZERS    "Use sanitizers to detect errors." OFF) # Option for the test builds. Do not use it in the production builds.
+set(WARNINGS_AS_ERRORS ON)
+set(ENABLE_PVS_STUDIO OFF)
+set(ENABLE_SANITIZERS ON) # Option for the test builds. Do not use it in the production builds.
+
+if (NOT CMAKE_BUILD_TYPE)
+	set(CMAKE_BUILD_TYPE Release)
+endif()
 
 # Set output directories
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../bin)
-
-# Include fixed CMake configuration
-include(cmake/config.cmake)
 
 # Include headers
 include_directories(include)
@@ -43,3 +44,10 @@ find_package(PNG REQUIRED)
 include_directories(${PNG_INCLUDE_DIR})
 target_link_libraries (${PROJECT_NAME} ${PNG_LIBRARY})
 target_compile_definitions(${PROJECT_NAME} PRIVATE cimg_use_png=1)
+
+# Include fixed CMake configuration
+set (ALL_TARGETS ${PROJECT_NAME})
+
+include(cmake/config.cmake)
+
+

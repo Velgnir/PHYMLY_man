@@ -7,7 +7,7 @@ set -o pipefail
 mkdir -p build
 (
     cd build 
-    cmake ..
+    cmake -Wvla ..
     make
 )
-#rm -r build
+rm -r build
