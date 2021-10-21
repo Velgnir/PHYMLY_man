@@ -43,10 +43,10 @@ int main(int argc, char *argv[]) {
     } else {
         std::cout << "file wasn't open" << std::endl;
     }
-    double dT = config.get_delta_t();
-    double dx = config.get_delta_x();
-    double dy = config.get_delta_y();
-    double alpha = config.get_alpha();
+    auto dT = config.get_delta_t();
+    auto dx = config.get_delta_x();
+    auto dy = config.get_delta_y();
+    auto alpha = config.get_alpha();
     auto width = config.get_width();
     auto height = config.get_height();
     int size_z=1;
