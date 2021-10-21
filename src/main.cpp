@@ -40,7 +40,6 @@ int main(int argc, char *argv[]) {
         std::cerr << "File " << config_file_name << " wasn't found" << std::endl;
         return -1;
     }
-    int all_time = 600;
     std::ifstream input_file(input_file_name);
     if (input_file) {
         std::cout << "file was open" << std::endl;
@@ -86,8 +85,9 @@ int main(int argc, char *argv[]) {
         for (auto number:line)
             if (number>temperature_limit)
                 temperature_limit = number;
-
-    for (int h = 0; h < all_time * (1/dT); ++h) {
+    size_t h=0;
+    while(true){
+        h++;
         for (size_t i = 0; i < width; ++i) {
             for (size_t j = 1; j < height; ++j) {
                 matrix[i][j] = get_formula_result(i,j,First_matrix,k1,k2,width,height);
@@ -108,14 +108,14 @@ int main(int argc, char *argv[]) {
             sprintf(filename, "images/f-%06d.png", h / 100);
             img.save_png(filename);
         }
+        for(size_t i=0; i< height; ++i){
+            if(matrix[i][width-1]<190){
+                break;
+            } else if (i==height-1){
+                return 0;
+            }
+        }
     }
-
-    for (auto &line: matrix) {
-        for (auto number: line)
-            std::cout << number << "  ";
-        std::cout << std::endl;
-    }
-    return 0;
 }
 
 ConfigFileOpt parse_args(int argc, char **argv) {
