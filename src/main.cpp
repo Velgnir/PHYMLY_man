@@ -52,6 +52,7 @@ int main(int argc, char *argv[]) {
     auto alpha = config.get_alpha();
     auto width = config.get_width();
     auto height = config.get_height();
+    auto program_end_temp_limit = config.get_temperature_limit();
     int size_z=1;
     int number_of_colour_threads = 3;
     double k1 = (alpha * dT) / (dx * dx);
@@ -87,17 +88,20 @@ int main(int argc, char *argv[]) {
                 temperature_limit = number;
     size_t h=0;
     while(true){
-        h++;
-        for (size_t i = 0; i < width; ++i) {
-            for (size_t j = 1; j < height; ++j) {
+        for (size_t i = 0; i < height; ++i) {
+            for (size_t j = 1; j < width; ++j) {
                 matrix[i][j] = get_formula_result(i,j,First_matrix,k1,k2,width,height);
-                if (h % 100 == 0) {
-                    C_to_rgb(matrix[i][j], r,g,b, temperature_limit);
-                    img(j, i, 0, 0) = r;
-                    img(j, i, 0, 1) = g;
-                    img(j, i, 0, 2) = b;
-                }
             }
+        }
+        if (h % 100 == 0) {
+            for (size_t i = 0; i < height; ++i) {
+                for (size_t j = 0; j < width; ++j) {
+                        C_to_rgb(matrix[i][j], r,g,b, temperature_limit);
+                        img(j, i, 0, 0) = r;
+                        img(j, i, 0, 1) = g;
+                        img(j, i, 0, 2) = b;
+                    }
+                }
         }
         for (size_t j = 0; j < width; ++j) {
             for (size_t k = 0; k < height; ++k) {
@@ -108,13 +112,17 @@ int main(int argc, char *argv[]) {
             sprintf(filename, "images/f-%06d.png", h / 100);
             img.save_png(filename);
         }
-        for(size_t i=0; i< height; ++i){
-            if(matrix[i][width-1]<190){
-                break;
-            } else if (i==height-1){
-                return 0;
+        for (int j = 0; j < height; ++j) {
+            for(size_t i=0; i< width; ++i){
+                if(matrix[j][i]<temperature_limit){
+                    goto break_point;
+                } else if (i == width - 1 && j == height - 1){
+                    return 0;
+                }
             }
         }
+        break_point:
+        h++;
     }
 }
 

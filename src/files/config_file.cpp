@@ -41,7 +41,8 @@ void ConfigFileOpt::init_opt_description() {
             ("field-properties.bottom_func_arg", po::value<double>(&bottom_func_arg),"bottom_func_arg")
             ("field-properties.bottom_func_arg2", po::value<double>(&bottom_func_arg2),"bottom_func_arg2")
             ("field-properties.temp", po::value<double>(&temp),"temp")
-            ("main.max_number_of_cycles", po::value<size_t>(&max_number_of_cycles),"max_number_of_cycles");
+            ("main.max_number_of_cycles", po::value<size_t>(&max_number_of_cycles),"max_number_of_cycles")
+            ("main.temperature_limit", po::value<double>(&temperature_limit), "temperature_limit");
 }
 
 void ConfigFileOpt::parse(const std::string &file_name) {

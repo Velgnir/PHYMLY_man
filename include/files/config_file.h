@@ -48,6 +48,8 @@ public:
 
     [[nodiscard]] const size_t &get_max_number_of_cycles() const { return max_number_of_cycles; };
 
+    [[nodiscard]] const double &get_temperature_limit() const { return temperature_limit; };
+
 private:
     void init_opt_description();
 
@@ -79,6 +81,7 @@ private:
     double bottom_func_arg2 = 0;
     double temp = 0;
     double epsilon = 0.0001;
+    double temperature_limit = 190;
     size_t max_number_of_cycles = 0;
 
     boost::program_options::options_description opt_conf{"Config File Options"};
