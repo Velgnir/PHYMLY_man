@@ -77,11 +77,7 @@ int main(int argc, char *argv[]) {
             input_file >> number;
 
 
-    for (size_t j = 0; j < size_x; ++j) {
-        for (size_t k = 0; k < size_y; ++k) {
-            matrix[j][k] = First_matrix[j][k];
-        }
-    }
+    matrix = First_matrix;
 
     for (auto &line:matrix)
         for (auto number:line)
@@ -104,11 +100,7 @@ int main(int argc, char *argv[]) {
                     }
                 }
         }
-        for (size_t j = 0; j < size_x; ++j) {
-            for (size_t k = 0; k < size_y; ++k) {
-                First_matrix[j][k] = matrix[j][k];
-            }
-        }
+        First_matrix = matrix;
         if (h % 100 == 0) {
             sprintf(filename, "images/f-%06d.png", h / 100);
             img.save_png(filename);
@@ -120,7 +112,7 @@ int main(int argc, char *argv[]) {
                 return 0;
             };
         }
-        h++;
+        ++h;
     }
 }
 
