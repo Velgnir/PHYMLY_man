@@ -36,6 +36,7 @@ int main(int argc, char *argv[]) {
         return -1;
     }
     ConfigFileOpt config = parse_args(argc, argv);
+
     if ((!std::filesystem::exists(config_file_name))) {
         std::cerr << "File " << config_file_name << " wasn't found" << std::endl;
         return -1;
@@ -50,8 +51,8 @@ int main(int argc, char *argv[]) {
     auto dx = config.get_delta_x();
     auto dy = config.get_delta_y();
     auto alpha = config.get_alpha();
-    auto width = config.get_width();
-    auto height = config.get_height();
+    auto size_x = config.get_width();
+    auto size_y = config.get_height();
     auto program_end_temp_limit = config.get_temperature_limit();
     int size_z=1;
     int number_of_colour_threads = 3;
@@ -60,15 +61,15 @@ int main(int argc, char *argv[]) {
     double temperature_limit;
     std::vector<std::vector<double>> matrix;
     std::vector<std::vector<double>> First_matrix;
-    cimg::CImg<unsigned char> img(width,height,size_z,number_of_colour_threads);
+    cimg::CImg<unsigned char> img(size_x,size_y,size_z,number_of_colour_threads);
     char filename[128];
     uint8_t r,g,b;
 
-    First_matrix.resize(height);
-    matrix.resize(height);
-    for (size_t i = 0; i < height; ++i) {
-        First_matrix[i].resize(width);
-        matrix[i].resize(width);
+    First_matrix.resize(size_y);
+    matrix.resize(size_y);
+    for (size_t i = 0; i < size_y; ++i) {
+        First_matrix[i].resize(size_x);
+        matrix[i].resize(size_x);
     }
 
     for (auto &line: First_matrix)
@@ -76,8 +77,8 @@ int main(int argc, char *argv[]) {
             input_file >> number;
 
 
-    for (size_t j = 0; j < width; ++j) {
-        for (size_t k = 0; k < height; ++k) {
+    for (size_t j = 0; j < size_x; ++j) {
+        for (size_t k = 0; k < size_y; ++k) {
             matrix[j][k] = First_matrix[j][k];
         }
     }
@@ -88,14 +89,14 @@ int main(int argc, char *argv[]) {
                 temperature_limit = number;
     size_t h=0;
     while(true){
-        for (size_t i = 0; i < height; ++i) {
-            for (size_t j = 1; j < width; ++j) {
-                matrix[i][j] = get_formula_result(i,j,First_matrix,k1,k2,width,height);
+        for (size_t i = 0; i < size_y; ++i) {
+            for (size_t j = 1; j < size_x; ++j) {
+                matrix[i][j] = get_formula_result(i,j,First_matrix,k1,k2,size_x,size_y);
             }
         }
         if (h % 100 == 0) {
-            for (size_t i = 0; i < height; ++i) {
-                for (size_t j = 0; j < width; ++j) {
+            for (size_t i = 0; i < size_y; ++i) {
+                for (size_t j = 0; j < size_x; ++j) {
                         C_to_rgb(matrix[i][j], r,g,b, temperature_limit);
                         img(j, i, 0, 0) = r;
                         img(j, i, 0, 1) = g;
@@ -103,8 +104,8 @@ int main(int argc, char *argv[]) {
                     }
                 }
         }
-        for (size_t j = 0; j < width; ++j) {
-            for (size_t k = 0; k < height; ++k) {
+        for (size_t j = 0; j < size_x; ++j) {
+            for (size_t k = 0; k < size_y; ++k) {
                 First_matrix[j][k] = matrix[j][k];
             }
         }
@@ -112,16 +113,13 @@ int main(int argc, char *argv[]) {
             sprintf(filename, "images/f-%06d.png", h / 100);
             img.save_png(filename);
         }
-        for (int j = 0; j < height; ++j) {
-            for(size_t i=0; i< width; ++i){
-                if(matrix[j][i]<temperature_limit){
-                    goto break_point;
-                } else if (i == width - 1 && j == height - 1){
-                    return 0;
-                }
-            }
+        for (int i = 0; i < size_y*size_x; ++i) {
+            if (matrix[i/size_x][i%size_x]<program_end_temp_limit){
+                break;
+            } else if(i/size_x == size_x-1 && i%size_x == size_y-1){
+                return 0;
+            };
         }
-        break_point:
         h++;
     }
 }
