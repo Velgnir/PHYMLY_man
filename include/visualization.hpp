@@ -5,4 +5,9 @@
 #include <iostream>
 #include <math.h>
 
-void C_to_rgb(const double Temperature, uint8_t &r, uint8_t &g, uint8_t &b, const double Temperature_limit);
+struct rgb_t{
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+};
+rgb_t C_to_rgb(const double Temperature, rgb_t colour_threads, const double Temperature_limit);

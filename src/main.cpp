@@ -62,8 +62,8 @@ int main(int argc, char *argv[]) {
     std::vector<std::vector<double>> matrix;
     std::vector<std::vector<double>> First_matrix;
     cimg::CImg<unsigned char> img(size_x,size_y,size_z,number_of_colour_threads);
-    char filename[128];
-    uint8_t r,g,b;
+    std::string filename;
+    rgb_t colour_threads;
 
     First_matrix.resize(size_y);
     matrix.resize(size_y);
@@ -93,17 +93,17 @@ int main(int argc, char *argv[]) {
         if (h % 100 == 0) {
             for (size_t i = 0; i < size_y; ++i) {
                 for (size_t j = 0; j < size_x; ++j) {
-                        C_to_rgb(matrix[i][j], r,g,b, temperature_limit);
-                        img(j, i, 0, 0) = r;
-                        img(j, i, 0, 1) = g;
-                        img(j, i, 0, 2) = b;
+                       colour_threads =  C_to_rgb(matrix[i][j], colour_threads, temperature_limit);
+                        img(j, i, 0, 0) = colour_threads.r;
+                        img(j, i, 0, 1) = colour_threads.g;
+                        img(j, i, 0, 2) = colour_threads.b;
                     }
                 }
         }
         First_matrix = matrix;
         if (h % 100 == 0) {
-            sprintf(filename, "images/f-%06d.png", h / 100);
-            img.save_png(filename);
+            filename = "images/im" + std::to_string(h / 100)+".png";
+            img.save_png(filename.c_str());
         }
         for (int i = 0; i < size_y*size_x; ++i) {
             if (matrix[i/size_x][i%size_x]<program_end_temp_limit){
