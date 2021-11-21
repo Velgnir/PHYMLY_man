@@ -299,7 +299,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.label_16.setText(QCoreApplication.translate("MainWindow", u"path to config file:", None))
         self.label_17.setText(QCoreApplication.translate("MainWindow", u"path to matrix file:", None))
-        self.label_7.setText(QCoreApplication.translate("MainWindow", u"standart temperature:", None))
+        self.label_7.setText(QCoreApplication.translate("MainWindow", u"standard temperature:", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"step in time:", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"Temperature limit:", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"step in Y:", None))
