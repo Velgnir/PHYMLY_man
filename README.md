@@ -1,11 +1,14 @@
-# Topic
-
-## Team
-
+# M.A.N.: <mark>Heat conductivity</mark>
+ - [Atamas Pavlo](https://github.com/jormungandr3000)
  - [Morhunenko Mykola](https://github.com/Myralllka)
-
 ## Prerequisites
 
-## Installing
+<mark>LIST LIBRARIES/TOOLS/OTHER TO INSTALL: cmake, PySide6</mark>
 
-## Usage
+### Compilation
+
+<mark>1. "python ./python interface/main.py" 2."./comile.sh"</mark>
+
+### Results
+
+<mark>images type ".png" in "images/"</mark>

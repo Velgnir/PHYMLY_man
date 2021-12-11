@@ -260,10 +260,20 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+<<<<<<< HEAD:python_interface/python_ui_interface.py
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"step in time[S]:", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"standart temperature[\u00b0 C]:", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"step in X[m]:", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"step in Y[m]:", None))
+=======
+        self.label_16.setText(QCoreApplication.translate("MainWindow", u"path to config file:", None))
+        self.label_17.setText(QCoreApplication.translate("MainWindow", u"path to matrix file:", None))
+        self.label_7.setText(QCoreApplication.translate("MainWindow", u"standard temperature:", None))
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"step in time:", None))
+        self.label_5.setText(QCoreApplication.translate("MainWindow", u"Temperature limit:", None))
+        self.label_6.setText(QCoreApplication.translate("MainWindow", u"step in Y:", None))
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"step in X:", None))
+>>>>>>> a41374e0b0918c63a293ae8981ddb1ebecb17128:python interface/python_ui_interface.py
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"coordinate size Y:", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"Temperature limit[\u00b0 C]:", None))
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"Thermal diffusivity[dm\u00b2/s]:", None))
