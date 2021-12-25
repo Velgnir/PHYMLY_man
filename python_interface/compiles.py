@@ -4,13 +4,13 @@ import glob
 import os
 
 def compiles():
-	os.system("bin/thermal_conductivity")
+	os.system("Main/thermal_conductivity")
 	# Create the frames
 	onlyfiles = next(os.walk("images"))[2] #dir is your directory path as string
 	len_of = len(onlyfiles)
 	frames = []
-	for i in range(len_of):
-		path ="images/im"+str(i)+".png"
+	for i in range(100):
+		path ="images/im"+str(int(i*(len_of/100)))+".png"
 		frames.append(Image.open(path))
 
 	# Save into a GIF file that loops forever
