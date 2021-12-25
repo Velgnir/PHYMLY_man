@@ -54,6 +54,7 @@ int main(int argc, char *argv[]) {
     auto size_x = config.get_width();
     auto size_y = config.get_height();
     auto program_end_temp_limit = config.get_temperature_limit();
+    auto cycle_limit = config.get_max_number_of_cycles();
     int size_z=1;
     int number_of_colour_threads = 3;
     double k1 = (alpha * dT) / (dx * dx);
@@ -102,16 +103,22 @@ int main(int argc, char *argv[]) {
         }
         First_matrix = matrix;
         if (h % 100 == 0) {
+            if(program_end_temp_limit > -274)
+                for (int i = 0; i < size_y*size_x; ++i) {
+                    if (matrix[i/size_x][i%size_x]<program_end_temp_limit){
+                        break;
+                    } else if(i/size_x == size_x-1 && i%size_x == size_y-1){
+                        return 0;
+                    };
+                }
+
             filename = "images/im" + std::to_string(h / 100)+".png";
             img.save_png(filename.c_str());
         }
-        for (int i = 0; i < size_y*size_x; ++i) {
-            if (matrix[i/size_x][i%size_x]<program_end_temp_limit){
-                break;
-            } else if(i/size_x == size_x-1 && i%size_x == size_y-1){
+        if(cycle_limit>0)
+            if(h>cycle_limit){
                 return 0;
-            };
-        }
+            }
         ++h;
     }
 }

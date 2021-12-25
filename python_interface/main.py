@@ -32,20 +32,33 @@ class MainWindow(QMainWindow):
 
             coordinate_size_X = float(self.ui.lineEdit.text())
             coordinate_size_Y = float(self.ui.lineEdit_2.text())
-            temperature_limit = float(self.ui.lineEdit_3.text())
+            
             step_in_time = float(self.ui.lineEdit_4.text())
             step_in_X = float(self.ui.lineEdit_5.text())
             step_in_Y = float(self.ui.lineEdit_6.text())
             standart_temperature = float(self.ui.lineEdit_7.text())
             heat_capacity = float(self.ui.lineEdit_8.text())
             
+            
 
             conf = configparser.RawConfigParser()
             conf.read("config.conf")
 
+
+            try:
+                cycle_limit = int(self.ui.lineEdit_9.text())
+                conf.set("main", "max_number_of_cycles", cycle_limit)
+            except:
+                conf.set("main", "max_number_of_cycles", -1)
+            try:
+                temperature_limit = float(self.ui.lineEdit_3.text())
+                conf.set("main", "temperature_limit", temperature_limit)
+            except:
+                conf.set("main", "temperature_limit", -275)
+
             conf.set("field-properties", "width", int(coordinate_size_X))
             conf.set("field-properties", "height", int(coordinate_size_Y))
-            conf.set("main", "temperature_limit", temperature_limit)
+
             conf.set("main", "delta_x", step_in_X)
             conf.set("main", "delta_t", step_in_time)
             conf.set("main", "delta_y", step_in_Y)

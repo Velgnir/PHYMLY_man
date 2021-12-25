@@ -7,7 +7,7 @@
 
 ### Compilation
 
-<mark>1. "python ./python interface/main.py" 2."./comile.sh"</mark>
+<mark>"python ./python_interface/main.py"</mark>
 
 ### Results
 
