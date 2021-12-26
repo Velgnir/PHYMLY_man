@@ -39,10 +39,38 @@ class MainWindow(QMainWindow):
             standart_temperature = float(self.ui.lineEdit_7.text())
             heat_capacity = float(self.ui.lineEdit_8.text())
             
-            
 
             conf = configparser.RawConfigParser()
             conf.read("config.conf")
+
+            try:
+                try1 = int(self.ui.lineEdit_10.text())
+                conf.set("field-properties", "left_func_arg", 1)
+            except:
+                conf.set("field-properties", "left_func_arg", 0)
+
+            try:
+                try2 = int(self.ui.lineEdit_13.text())
+                conf.set("field-properties", "up_func_arg", 1)
+            except:
+                conf.set("field-properties", "up_func_arg", 0)
+
+            try:
+                try3 = int(self.ui.lineEdit_11.text())
+                conf.set("field-properties", "right_func_arg", int(coordinate_size_X-1))
+            except:
+                conf.set("field-properties", "right_func_arg", int(coordinate_size_X))
+
+            try:
+                try4 = int(self.ui.lineEdit_12.text())
+                conf.set("field-properties", "bottom_func_arg", int(coordinate_size_Y-1))
+            except:
+                conf.set("field-properties", "bottom_func_arg", int(coordinate_size_Y))
+
+
+
+
+
 
 
             try:
@@ -118,6 +146,53 @@ class MainWindow(QMainWindow):
                         for y in range(0,int(coordinate_size_Y)):
                             if(eval(y_list[i][1::].replace("x",str(eval(x_string)))) == y):
                                 matrix[y][x] = eval(temperature)
+            
+            try:
+                border_function = self.ui.lineEdit_10.text()
+                for i in range(int(coordinate_size_Y)):
+                    try:
+                        result =border_function.replace("x",str(i))
+                        print(result) 
+                    except:
+                        result = border_function
+                    matrix[i][0] = int(eval(result))
+            except:
+                pass
+            
+
+            try:
+                border_function = self.ui.lineEdit_11.text()
+                for i in range(int(coordinate_size_Y)):
+                    try:
+                        result =border_function.replace("x",str(i))
+                    except:
+                        result = border_function
+                    matrix[i][int(coordinate_size_X-1)] = int(eval(result))
+            except:
+                pass
+
+            try:
+                border_function = self.ui.lineEdit_13.text()
+                for i in range(int(coordinate_size_X)):
+                    try:
+                        result =border_function.replace("x",str(i))
+                    except:
+                        result = border_function
+                    matrix[int(coordinate_size_X)][i] = int(eval(result))
+            except:
+                pass
+
+            try:
+                border_function = self.ui.lineEdit_12.text()
+                for i in range(int(coordinate_size_X)):
+                    try:
+                        result =border_function.replace("x",str(i))
+                    except:
+                        result = border_function
+                    matrix[1][i] = int(eval(result))
+            except:
+                pass
+
             matrix_file = open("input.txt", "w")
 
             if(self.ui.checkBox.isChecked()):
@@ -142,7 +217,6 @@ class MainWindow(QMainWindow):
             else:
                 self.ui.label_11.setStyleSheet("color: rgba(255,0,0,255);")
                 self.ui.label_10.setStyleSheet("color: rgba(255,0,0,0);")
-    			
 
 
 if __name__ == '__main__':
