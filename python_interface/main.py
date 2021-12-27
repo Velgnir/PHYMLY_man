@@ -19,9 +19,12 @@ class MainWindow(QMainWindow):
 
     def bp(self):
         global conf
-        x_list = (self.ui.textEdit.toPlainText()).split("\n")
-        y_list = (self.ui.textEdit_2.toPlainText()).split("\n")
-        temperature_list = (self.ui.textEdit_3.toPlainText()).split("\n")
+        try:
+            x_list = (self.ui.textEdit.toPlainText()).split("\n")
+            y_list = (self.ui.textEdit_2.toPlainText()).split("\n")
+            temperature_list = (self.ui.textEdit_3.toPlainText()).split("\n")
+        except:
+            pass
         if (len(x_list)!=len(y_list) or len(x_list)!= len(temperature_list)):
             self.ui.label_15.setStyleSheet("color: rgba(255,0,0,255);")
         else:
@@ -78,6 +81,8 @@ class MainWindow(QMainWindow):
                 conf.set("main", "max_number_of_cycles", cycle_limit)
             except:
                 conf.set("main", "max_number_of_cycles", -1)
+                temperature_limit = float(self.ui.lineEdit_3.text())
+                conf.set("main", "temperature_limit", temperature_limit)
             try:
                 temperature_limit = float(self.ui.lineEdit_3.text())
                 conf.set("main", "temperature_limit", temperature_limit)
@@ -104,55 +109,56 @@ class MainWindow(QMainWindow):
                 for j in range(0,int(coordinate_size_X)):
                     matrix[i].append(standart_temperature)
 
-            for i in range(0,len(x_list)):
-                if(y_list[i][0]==">"):
+            try:
+                for i in range(0,len(x_list)):
+                    if(y_list[i][0]==">"):
 
-                    for x in range(0,int(coordinate_size_X)):
-                        try:
-                            x_string = x_list[i].replace("x",str(x))
-                        except:
-                            x_string = x_list[i]
-                        try:
-                            temperature = temperature_list[i].replace("x",eval(str(x_string)))
-                        except:
-                            temperature = temperature_list[i]
+                        for x in range(0,int(coordinate_size_X)):
+                            try:
+                                x_string = x_list[i].replace("x",str(x))
+                            except:
+                                x_string = x_list[i]
+                            try:
+                                temperature = temperature_list[i].replace("x",eval(str(x_string)))
+                            except:
+                                temperature = temperature_list[i]
 
-                        for y in range(0,int(coordinate_size_Y)):
-                            if(eval(y_list[i][1::].replace("x",str(eval(x_string)))) <= y-1):
-                                matrix[y][x] = eval(temperature)
-                elif(y_list[i][0]=="<"):
-                    for x in range(0,int(coordinate_size_X)):
-                        try:
-                            x_string = x_list[i].replace("x",str(x))
-                        except:
-                            x_string = x_list[i]
-                        try:
-                            temperature = temperature_list[i].replace("x",eval(str(x_string)))
-                        except:
-                            temperature = temperature_list[i]
-                        for y in range(0,int(coordinate_size_Y)):
-                            if(eval(y_list[i][1::].replace("x",str(eval(x_string)))) >= y-1):
-                                matrix[y][x] = eval(temperature)
-                else:
-                    for x in range(0,int(coordinate_size_X)):
-                        try:
-                            x_string = x_list[i].replace("x",str(x))
-                        except:
-                            x_string = x_list[i]
-                        try:
-                            temperature = temperature_list[i].replace("x",eval(str(x_string)))
-                        except:
-                            temperature = temperature_list[i]
-                        for y in range(0,int(coordinate_size_Y)):
-                            if(eval(y_list[i][1::].replace("x",str(eval(x_string)))) == y):
-                                matrix[y][x] = eval(temperature)
-            
+                            for y in range(0,int(coordinate_size_Y)):
+                                if(eval(y_list[i][1::].replace("x",str(eval(x_string)))) <= y-1):
+                                    matrix[y][x] = eval(temperature)
+                    elif(y_list[i][0]=="<"):
+                        for x in range(0,int(coordinate_size_X)):
+                            try:
+                                x_string = x_list[i].replace("x",str(x))
+                            except:
+                                x_string = x_list[i]
+                            try:
+                                temperature = temperature_list[i].replace("x",eval(str(x_string)))
+                            except:
+                                temperature = temperature_list[i]
+                            for y in range(0,int(coordinate_size_Y)):
+                                if(eval(y_list[i][1::].replace("x",str(eval(x_string)))) >= y-1):
+                                    matrix[y][x] = eval(temperature)
+                    else:
+                        for x in range(0,int(coordinate_size_X)):
+                            try:
+                                x_string = x_list[i].replace("x",str(x))
+                            except:
+                                x_string = x_list[i]
+                            try:
+                                temperature = temperature_list[i].replace("x",eval(str(x_string)))
+                            except:
+                                temperature = temperature_list[i]
+                            for y in range(0,int(coordinate_size_Y)):
+                                if(eval(y_list[i][1::].replace("x",str(eval(x_string)))) == y):
+                                    matrix[y][x] = eval(temperature)
+            except:
+                pass
             try:
                 border_function = self.ui.lineEdit_10.text()
                 for i in range(int(coordinate_size_Y)):
                     try:
                         result =border_function.replace("x",str(i))
-                        print(result) 
                     except:
                         result = border_function
                     matrix[i][0] = int(eval(result))
@@ -212,7 +218,7 @@ class MainWindow(QMainWindow):
             compiles.compiles()
  
         except:
-            if(self.ui.lineEdit.text()=="" or self.ui.lineEdit_2.text()=="" or self.ui.lineEdit_3.text()=="" or self.ui.lineEdit_4.text()=="" or self.ui.lineEdit_5.text()=="" or self.ui.lineEdit_6.text()=="" or self.ui.lineEdit_7.text()=="" or self.ui.lineEdit_8.text()==""):
+            if(self.ui.lineEdit.text()=="" or self.ui.lineEdit_2.text()=="" or (self.ui.lineEdit_9.text()=="" and self.ui.lineEdit_3.text()=="") or self.ui.lineEdit_4.text()=="" or self.ui.lineEdit_5.text()=="" or self.ui.lineEdit_6.text()=="" or self.ui.lineEdit_7.text()=="" or self.ui.lineEdit_8.text()==""):
                 self.ui.label_10.setStyleSheet("color: rgba(255,0,0,255);")
             else:
                 self.ui.label_11.setStyleSheet("color: rgba(255,0,0,255);")
