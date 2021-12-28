@@ -41,6 +41,8 @@ class MainWindow(QMainWindow):
             step_in_Y = float(self.ui.lineEdit_6.text())
             standart_temperature = float(self.ui.lineEdit_7.text())
             heat_capacity = float(self.ui.lineEdit_8.text())
+            density = float(self.ui.lineEdit_15.text())
+            thermal_conduction = float(self.ui.lineEdit_14.text())
             
 
             conf = configparser.RawConfigParser()
@@ -96,6 +98,8 @@ class MainWindow(QMainWindow):
             conf.set("main", "delta_t", step_in_time)
             conf.set("main", "delta_y", step_in_Y)
             conf.set("main", "specific_heat_capacity", heat_capacity)
+            conf.set("main", "density", density)
+            conf.set("main", "thermal_conduction", thermal_conduction)
 
 
             with open("config.conf", "w") as config:
@@ -218,7 +222,7 @@ class MainWindow(QMainWindow):
             compiles.compiles()
  
         except:
-            if(self.ui.lineEdit.text()=="" or self.ui.lineEdit_2.text()=="" or (self.ui.lineEdit_9.text()=="" and self.ui.lineEdit_3.text()=="") or self.ui.lineEdit_4.text()=="" or self.ui.lineEdit_5.text()=="" or self.ui.lineEdit_6.text()=="" or self.ui.lineEdit_7.text()=="" or self.ui.lineEdit_8.text()==""):
+            if(self.ui.lineEdit_15.text()=="" or self.ui.lineEdit_14.text()=="" or self.ui.lineEdit.text()=="" or self.ui.lineEdit_2.text()=="" or (self.ui.lineEdit_9.text()=="" and self.ui.lineEdit_3.text()=="") or self.ui.lineEdit_4.text()=="" or self.ui.lineEdit_5.text()=="" or self.ui.lineEdit_6.text()=="" or self.ui.lineEdit_7.text()=="" or self.ui.lineEdit_8.text()==""):
                 self.ui.label_10.setStyleSheet("color: rgba(255,0,0,255);")
             else:
                 self.ui.label_11.setStyleSheet("color: rgba(255,0,0,255);")

@@ -30,10 +30,49 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.gridLayoutWidget = QWidget(self.centralwidget)
         self.gridLayoutWidget.setObjectName(u"gridLayoutWidget")
-        self.gridLayoutWidget.setGeometry(QRect(0, 0, 651, 251))
+        self.gridLayoutWidget.setGeometry(QRect(0, 0, 651, 261))
         self.gridLayout = QGridLayout(self.gridLayoutWidget)
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
+        self.lineEdit_8 = QLineEdit(self.gridLayoutWidget)
+        self.lineEdit_8.setObjectName(u"lineEdit_8")
+
+        self.gridLayout.addWidget(self.lineEdit_8, 2, 4, 1, 1)
+
+        self.label_7 = QLabel(self.gridLayoutWidget)
+        self.label_7.setObjectName(u"label_7")
+
+        self.gridLayout.addWidget(self.label_7, 2, 0, 1, 1)
+
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout.addItem(self.horizontalSpacer_4, 1, 5, 1, 1)
+
+        self.label = QLabel(self.gridLayoutWidget)
+        self.label.setObjectName(u"label")
+
+        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
+
+        self.label_3 = QLabel(self.gridLayoutWidget)
+        self.label_3.setObjectName(u"label_3")
+
+        self.gridLayout.addWidget(self.label_3, 0, 3, 1, 1)
+
+        self.lineEdit = QLineEdit(self.gridLayoutWidget)
+        self.lineEdit.setObjectName(u"lineEdit")
+
+        self.gridLayout.addWidget(self.lineEdit, 0, 1, 1, 1)
+
+        self.lineEdit_2 = QLineEdit(self.gridLayoutWidget)
+        self.lineEdit_2.setObjectName(u"lineEdit_2")
+
+        self.gridLayout.addWidget(self.lineEdit_2, 0, 4, 1, 1)
+
+        self.lineEdit_7 = QLineEdit(self.gridLayoutWidget)
+        self.lineEdit_7.setObjectName(u"lineEdit_7")
+
+        self.gridLayout.addWidget(self.lineEdit_7, 2, 1, 1, 1)
+
         self.formLayout = QFormLayout()
         self.formLayout.setObjectName(u"formLayout")
         self.label_5 = QLabel(self.gridLayoutWidget)
@@ -59,23 +98,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addLayout(self.formLayout, 1, 6, 1, 2)
 
-        self.checkBox = QCheckBox(self.gridLayoutWidget)
-        self.checkBox.setObjectName(u"checkBox")
-
-        self.gridLayout.addWidget(self.checkBox, 2, 6, 1, 1)
-
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.gridLayout.addItem(self.horizontalSpacer, 0, 2, 1, 1)
-
         self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.gridLayout.addItem(self.horizontalSpacer_2, 0, 5, 1, 1)
 
-        self.horizontalLayout_2 = QHBoxLayout()
-        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.gridLayout.addLayout(self.horizontalLayout_2, 2, 5, 1, 1)
+        self.gridLayout.addItem(self.horizontalSpacer, 0, 2, 1, 1)
 
         self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
@@ -91,64 +120,30 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.label_8, 2, 3, 1, 1)
 
-        self.lineEdit_2 = QLineEdit(self.gridLayoutWidget)
-        self.lineEdit_2.setObjectName(u"lineEdit_2")
+        self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
 
-        self.gridLayout.addWidget(self.lineEdit_2, 0, 4, 1, 1)
+        self.gridLayout.addLayout(self.horizontalLayout_2, 2, 5, 1, 1)
 
-        self.lineEdit = QLineEdit(self.gridLayoutWidget)
-        self.lineEdit.setObjectName(u"lineEdit")
+        self.lineEdit_5 = QLineEdit(self.gridLayoutWidget)
+        self.lineEdit_5.setObjectName(u"lineEdit_5")
 
-        self.gridLayout.addWidget(self.lineEdit, 0, 1, 1, 1)
-
-        self.lineEdit_7 = QLineEdit(self.gridLayoutWidget)
-        self.lineEdit_7.setObjectName(u"lineEdit_7")
-
-        self.gridLayout.addWidget(self.lineEdit_7, 2, 1, 1, 1)
-
-        self.label = QLabel(self.gridLayoutWidget)
-        self.label.setObjectName(u"label")
-
-        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
-
-        self.lineEdit_8 = QLineEdit(self.gridLayoutWidget)
-        self.lineEdit_8.setObjectName(u"lineEdit_8")
-
-        self.gridLayout.addWidget(self.lineEdit_8, 2, 4, 1, 1)
-
-        self.label_7 = QLabel(self.gridLayoutWidget)
-        self.label_7.setObjectName(u"label_7")
-
-        self.gridLayout.addWidget(self.label_7, 2, 0, 1, 1)
-
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.gridLayout.addItem(self.horizontalSpacer_4, 1, 5, 1, 1)
-
-        self.label_3 = QLabel(self.gridLayoutWidget)
-        self.label_3.setObjectName(u"label_3")
-
-        self.gridLayout.addWidget(self.label_3, 0, 3, 1, 1)
-
-        self.label_2 = QLabel(self.gridLayoutWidget)
-        self.label_2.setObjectName(u"label_2")
-
-        self.gridLayout.addWidget(self.label_2, 0, 6, 1, 1)
-
-        self.lineEdit_4 = QLineEdit(self.gridLayoutWidget)
-        self.lineEdit_4.setObjectName(u"lineEdit_4")
-
-        self.gridLayout.addWidget(self.lineEdit_4, 0, 7, 1, 1)
+        self.gridLayout.addWidget(self.lineEdit_5, 1, 1, 1, 1)
 
         self.label_4 = QLabel(self.gridLayoutWidget)
         self.label_4.setObjectName(u"label_4")
 
         self.gridLayout.addWidget(self.label_4, 1, 0, 1, 1)
 
-        self.lineEdit_5 = QLineEdit(self.gridLayoutWidget)
-        self.lineEdit_5.setObjectName(u"lineEdit_5")
+        self.lineEdit_4 = QLineEdit(self.gridLayoutWidget)
+        self.lineEdit_4.setObjectName(u"lineEdit_4")
 
-        self.gridLayout.addWidget(self.lineEdit_5, 1, 1, 1, 1)
+        self.gridLayout.addWidget(self.lineEdit_4, 0, 7, 1, 1)
+
+        self.label_2 = QLabel(self.gridLayoutWidget)
+        self.label_2.setObjectName(u"label_2")
+
+        self.gridLayout.addWidget(self.label_2, 0, 6, 1, 1)
 
         self.label_6 = QLabel(self.gridLayoutWidget)
         self.label_6.setObjectName(u"label_6")
@@ -159,6 +154,31 @@ class Ui_MainWindow(object):
         self.lineEdit_6.setObjectName(u"lineEdit_6")
 
         self.gridLayout.addWidget(self.lineEdit_6, 1, 4, 1, 1)
+
+        self.checkBox = QCheckBox(self.gridLayoutWidget)
+        self.checkBox.setObjectName(u"checkBox")
+
+        self.gridLayout.addWidget(self.checkBox, 3, 6, 1, 1)
+
+        self.label_22 = QLabel(self.gridLayoutWidget)
+        self.label_22.setObjectName(u"label_22")
+
+        self.gridLayout.addWidget(self.label_22, 2, 6, 1, 1)
+
+        self.lineEdit_14 = QLineEdit(self.gridLayoutWidget)
+        self.lineEdit_14.setObjectName(u"lineEdit_14")
+
+        self.gridLayout.addWidget(self.lineEdit_14, 2, 7, 1, 1)
+
+        self.label_23 = QLabel(self.gridLayoutWidget)
+        self.label_23.setObjectName(u"label_23")
+
+        self.gridLayout.addWidget(self.label_23, 3, 0, 1, 1)
+
+        self.lineEdit_15 = QLineEdit(self.gridLayoutWidget)
+        self.lineEdit_15.setObjectName(u"lineEdit_15")
+
+        self.gridLayout.addWidget(self.lineEdit_15, 3, 1, 1, 1)
 
         self.label_10 = QLabel(self.centralwidget)
         self.label_10.setObjectName(u"label_10")
@@ -234,7 +254,7 @@ class Ui_MainWindow(object):
 
         self.label_14 = QLabel(self.centralwidget)
         self.label_14.setObjectName(u"label_14")
-        self.label_14.setGeometry(QRect(20, 320, 400, 31))
+        self.label_14.setGeometry(QRect(20, 320, 360, 31))
         self.label_15 = QLabel(self.centralwidget)
         self.label_15.setObjectName(u"label_15")
         self.label_15.setEnabled(True)
@@ -250,11 +270,14 @@ class Ui_MainWindow(object):
         font1 = QFont()
         font1.setFamilies([u"Arial"])
         font1.setPointSize(14)
+        font2 = QFont()
+        font2.setFamilies([u"Arial"])
+        font2.setPointSize(8)
         self.pushButton.setFont(font1)
         self.label_11 = QLabel(self.centralwidget)
         self.label_11.setObjectName(u"label_11")
         self.label_11.setEnabled(True)
-        self.label_11.setGeometry(QRect(20, 260, 291, 21))
+        self.label_11.setGeometry(QRect(20, 260, 360, 21))
         self.label_11.setFont(font)
         self.label_11.setCursor(QCursor(Qt.ArrowCursor))
         self.label_11.setStyleSheet(u"color: rgba(255,0,0,0);")
@@ -300,7 +323,17 @@ class Ui_MainWindow(object):
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
         MainWindow.setStatusBar(self.statusbar)
-
+        self.label.setFont(font2)
+        self.label_2.setFont(font2)
+        self.label_3.setFont(font2)
+        self.label_4.setFont(font2)
+        self.label_5.setFont(font2)
+        self.label_6.setFont(font2)
+        self.label_7.setFont(font2)
+        self.label_8.setFont(font2)
+        self.label_16.setFont(font2)
+        self.label_22.setFont(font2)
+        self.label_23.setFont(font2)
         self.retranslateUi(MainWindow)
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -308,21 +341,23 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        self.label_7.setText(QCoreApplication.translate("MainWindow", u"standart temperature[\u00b0 C]:", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"coordinate size X:", None))
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"coordinate size Y:", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"Temperature limit[\u00b0 C]:", None))
         self.label_16.setText(QCoreApplication.translate("MainWindow", u"limit of steps in time:", None))
-        self.checkBox.setText(QCoreApplication.translate("MainWindow", u"rotate matrix on 90\u00b0", None))
-        self.label_8.setText(QCoreApplication.translate("MainWindow", u"Thermal diffusivity[m\u00b2/s]:", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"coordinate size X:", None))
-        self.label_7.setText(QCoreApplication.translate("MainWindow", u"standart temperature[\u00b0 C]:", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"coordinate size Y:", None))
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"step in time[S]:", None))
+        self.label_8.setText(QCoreApplication.translate("MainWindow", u"specific heat capacity[J/(kg\u22c5\u00b0C)]:", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"step in X[m]:", None))
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"step in time[S/2]:", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"step in Y[m]:", None))
+        self.checkBox.setText(QCoreApplication.translate("MainWindow", u"rotate matrix on 90\u00b0", None))
+        self.label_22.setText(QCoreApplication.translate("MainWindow", u"thermal conduction[W/(m\u22c5\u00b0C)]:", None))
+        self.label_23.setText(QCoreApplication.translate("MainWindow", u"density[kg/m³]:", None))
         self.label_10.setText(QCoreApplication.translate("MainWindow", u"All fields are required", None))
         self.label_12.setText(QCoreApplication.translate("MainWindow", u"y=", None))
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"x=", None))
         self.label_13.setText(QCoreApplication.translate("MainWindow", u"temperature[\u00b0 C]=", None))
-        self.label_14.setText(QCoreApplication.translate("MainWindow", u"You can create a temperature graph by functions here:", None))
+        self.label_14.setText(QCoreApplication.translate("MainWindow", u"Create a temperature graphs by function here:", None))
         self.label_15.setText(QCoreApplication.translate("MainWindow", u"Number of lines of functions mustn't be different", None))
         self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Confirm", None))
         self.label_11.setText(QCoreApplication.translate("MainWindow", u"All numbers must be rational", None))
