@@ -4,7 +4,6 @@ import glob
 import os
 
 def compiles():
-	os.system("Main/thermal_conductivity")
 	# Create the frames
 	onlyfiles = next(os.walk("images"))[2] #dir is your directory path as string
 	len_of = len(onlyfiles)
@@ -12,7 +11,7 @@ def compiles():
 	for i in range(100):
 		path ="images/im"+str(int(i*(len_of/100)))+".png"
 		frames.append(Image.open(path))
-
+	frames.append(Image.open("images/zEND.png"))
 	# Save into a GIF file that loops forever
 	frames[0].save('result.gif', format='GIF',
 		append_images=frames[1:],
