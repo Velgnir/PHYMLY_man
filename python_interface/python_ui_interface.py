@@ -18,14 +18,14 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QCheckBox, QFormLayout, QFrame,
     QGridLayout, QHBoxLayout, QLabel, QLineEdit,
     QMainWindow, QMenuBar, QPushButton, QScrollArea,
-    QSizePolicy, QSpacerItem, QStatusBar, QTextEdit,
-    QWidget)
+    QSizePolicy, QSpacerItem, QStatusBar, QTextBrowser,
+    QTextEdit, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1123, 625)
+        MainWindow.resize(1114, 705)
         MainWindow.setStyleSheet(u"")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -48,26 +48,6 @@ class Ui_MainWindow(object):
         self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.gridLayout.addItem(self.horizontalSpacer_4, 1, 5, 1, 1)
-
-        self.label = QLabel(self.gridLayoutWidget)
-        self.label.setObjectName(u"label")
-
-        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
-
-        self.label_3 = QLabel(self.gridLayoutWidget)
-        self.label_3.setObjectName(u"label_3")
-
-        self.gridLayout.addWidget(self.label_3, 0, 3, 1, 1)
-
-        self.lineEdit = QLineEdit(self.gridLayoutWidget)
-        self.lineEdit.setObjectName(u"lineEdit")
-
-        self.gridLayout.addWidget(self.lineEdit, 0, 1, 1, 1)
-
-        self.lineEdit_2 = QLineEdit(self.gridLayoutWidget)
-        self.lineEdit_2.setObjectName(u"lineEdit_2")
-
-        self.gridLayout.addWidget(self.lineEdit_2, 0, 4, 1, 1)
 
         self.lineEdit_7 = QLineEdit(self.gridLayoutWidget)
         self.lineEdit_7.setObjectName(u"lineEdit_7")
@@ -126,16 +106,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addLayout(self.horizontalLayout_2, 2, 5, 1, 1)
 
-        self.lineEdit_5 = QLineEdit(self.gridLayoutWidget)
-        self.lineEdit_5.setObjectName(u"lineEdit_5")
-
-        self.gridLayout.addWidget(self.lineEdit_5, 1, 1, 1, 1)
-
-        self.label_4 = QLabel(self.gridLayoutWidget)
-        self.label_4.setObjectName(u"label_4")
-
-        self.gridLayout.addWidget(self.label_4, 1, 0, 1, 1)
-
         self.lineEdit_4 = QLineEdit(self.gridLayoutWidget)
         self.lineEdit_4.setObjectName(u"lineEdit_4")
 
@@ -145,16 +115,6 @@ class Ui_MainWindow(object):
         self.label_2.setObjectName(u"label_2")
 
         self.gridLayout.addWidget(self.label_2, 0, 6, 1, 1)
-
-        self.label_6 = QLabel(self.gridLayoutWidget)
-        self.label_6.setObjectName(u"label_6")
-
-        self.gridLayout.addWidget(self.label_6, 1, 3, 1, 1)
-
-        self.lineEdit_6 = QLineEdit(self.gridLayoutWidget)
-        self.lineEdit_6.setObjectName(u"lineEdit_6")
-
-        self.gridLayout.addWidget(self.lineEdit_6, 1, 4, 1, 1)
 
         self.checkBox = QCheckBox(self.gridLayoutWidget)
         self.checkBox.setObjectName(u"checkBox")
@@ -181,18 +141,46 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.lineEdit_15, 3, 1, 1, 1)
 
-        self.label_10 = QLabel(self.centralwidget)
-        self.label_10.setObjectName(u"label_10")
-        self.label_10.setEnabled(True)
-        self.label_10.setGeometry(QRect(60, 470, 211, 21))
-        font = QFont()
-        font.setFamilies([u"MS PGothic"])
-        font.setPointSize(14)
-        self.label_10.setFont(font)
-        self.label_10.setCursor(QCursor(Qt.ArrowCursor))
-        self.label_10.setStyleSheet(u"color: rgba(255,0,0,0);")
-        self.label_10.setLineWidth(1)
-        self.label_10.setMidLineWidth(1)
+        self.label_4 = QLabel(self.gridLayoutWidget)
+        self.label_4.setObjectName(u"label_4")
+
+        self.gridLayout.addWidget(self.label_4, 0, 0, 1, 1)
+
+        self.lineEdit_5 = QLineEdit(self.gridLayoutWidget)
+        self.lineEdit_5.setObjectName(u"lineEdit_5")
+
+        self.gridLayout.addWidget(self.lineEdit_5, 0, 1, 1, 1)
+
+        self.label = QLabel(self.gridLayoutWidget)
+        self.label.setObjectName(u"label")
+
+        self.gridLayout.addWidget(self.label, 1, 0, 1, 1)
+
+        self.lineEdit = QLineEdit(self.gridLayoutWidget)
+        self.lineEdit.setObjectName(u"lineEdit")
+
+        self.gridLayout.addWidget(self.lineEdit, 1, 1, 1, 1)
+
+        self.label_6 = QLabel(self.gridLayoutWidget)
+        self.label_6.setObjectName(u"label_6")
+
+        self.gridLayout.addWidget(self.label_6, 0, 3, 1, 1)
+
+        self.lineEdit_6 = QLineEdit(self.gridLayoutWidget)
+        self.lineEdit_6.setObjectName(u"lineEdit_6")
+
+        self.gridLayout.addWidget(self.lineEdit_6, 0, 4, 1, 1)
+
+        self.label_3 = QLabel(self.gridLayoutWidget)
+        self.label_3.setObjectName(u"label_3")
+
+        self.gridLayout.addWidget(self.label_3, 1, 3, 1, 1)
+
+        self.lineEdit_2 = QLineEdit(self.gridLayoutWidget)
+        self.lineEdit_2.setObjectName(u"lineEdit_2")
+
+        self.gridLayout.addWidget(self.lineEdit_2, 1, 4, 1, 1)
+
         self.gridLayoutWidget_2 = QWidget(self.centralwidget)
         self.gridLayoutWidget_2.setObjectName(u"gridLayoutWidget_2")
         self.gridLayoutWidget_2.setGeometry(QRect(10, 360, 621, 31))
@@ -201,21 +189,6 @@ class Ui_MainWindow(object):
         self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
         self.label_12 = QLabel(self.gridLayoutWidget_2)
         self.label_12.setObjectName(u"label_12")
-        font2 = QFont()
-        font2.setFamilies([u"MS PGothic"])
-        font2.setPointSize(8)
-
-        self.label.setFont(font2)
-        self.label_2.setFont(font2)
-        self.label_3.setFont(font2)
-        self.label_4.setFont(font2)
-        self.label_5.setFont(font2)
-        self.label_6.setFont(font2)
-        self.label_7.setFont(font2)
-        self.label_8.setFont(font2)
-        self.label_16.setFont(font2)
-        self.label_22.setFont(font2)
-        self.label_23.setFont(font2)
 
         self.gridLayout_2.addWidget(self.label_12, 0, 3, 1, 1)
 
@@ -270,32 +243,14 @@ class Ui_MainWindow(object):
 
         self.label_14 = QLabel(self.centralwidget)
         self.label_14.setObjectName(u"label_14")
-        self.label_14.setGeometry(QRect(20, 320, 325, 31))
-        self.label_15 = QLabel(self.centralwidget)
-        self.label_15.setObjectName(u"label_15")
-        self.label_15.setEnabled(True)
-        self.label_15.setGeometry(QRect(20, 410, 491, 21))
-        self.label_15.setFont(font)
-        self.label_15.setCursor(QCursor(Qt.ArrowCursor))
-        self.label_15.setStyleSheet(u"color: rgba(255,0,0,0);")
-        self.label_15.setLineWidth(1)
-        self.label_15.setMidLineWidth(1)
+        self.label_14.setGeometry(QRect(20, 320, 231, 31))
         self.pushButton = QPushButton(self.centralwidget)
         self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setGeometry(QRect(780, 530, 261, 51))
-        font1 = QFont()
-        font1.setFamilies([u"Arial"])
-        font1.setPointSize(14)
-        self.pushButton.setFont(font1)
-        self.label_11 = QLabel(self.centralwidget)
-        self.label_11.setObjectName(u"label_11")
-        self.label_11.setEnabled(True)
-        self.label_11.setGeometry(QRect(20, 260, 291, 21))
-        self.label_11.setFont(font)
-        self.label_11.setCursor(QCursor(Qt.ArrowCursor))
-        self.label_11.setStyleSheet(u"color: rgba(255,0,0,0);")
-        self.label_11.setLineWidth(1)
-        self.label_11.setMidLineWidth(1)
+        self.pushButton.setGeometry(QRect(770, 520, 261, 51))
+        font = QFont()
+        font.setFamilies([u"Arial"])
+        font.setPointSize(14)
+        self.pushButton.setFont(font)
         self.label_17 = QLabel(self.centralwidget)
         self.label_17.setObjectName(u"label_17")
         self.label_17.setGeometry(QRect(850, 70, 111, 20))
@@ -322,7 +277,7 @@ class Ui_MainWindow(object):
         self.lineEdit_13.setGeometry(QRect(850, 100, 111, 20))
         self.label_21 = QLabel(self.centralwidget)
         self.label_21.setObjectName(u"label_21")
-        self.label_21.setGeometry(QRect(670, 30, 500,31))
+        self.label_21.setGeometry(QRect(670, 30, 361, 31))
         self.line = QFrame(self.centralwidget)
         self.line.setObjectName(u"line")
         self.line.setGeometry(QRect(650, 0, 20, 511))
@@ -330,30 +285,38 @@ class Ui_MainWindow(object):
         self.line.setFrameShadow(QFrame.Sunken)
         self.label_24 = QLabel(self.centralwidget)
         self.label_24.setObjectName(u"label_24")
-        self.label_24.setGeometry(QRect(851, 211, 100, 100))
+        self.label_24.setGeometry(QRect(860, 220, 91, 91))
+        self.label_24.setPixmap(QPixmap(u"C:/Users/\u041c\u0438\u043b\u043e\u0440\u0434/Documents/Eren.png"))
         self.pushButton_2 = QPushButton(self.centralwidget)
         self.pushButton_2.setObjectName(u"pushButton_2")
-        self.pushButton_2.setGeometry(QRect(40, 520, 261, 51))
-        self.pushButton_2.setFont(font1)
+        self.pushButton_2.setGeometry(QRect(70, 520, 261, 51))
+        self.pushButton_2.setFont(font)
         self.label_25 = QLabel(self.centralwidget)
         self.label_25.setObjectName(u"label_25")
         self.label_25.setGeometry(QRect(720, 500, 381, 16))
         self.label_26 = QLabel(self.centralwidget)
         self.label_26.setObjectName(u"label_26")
-        self.label_26.setGeometry(QRect(720, 450, 346, 30))
+        self.label_26.setGeometry(QRect(720, 450, 381, 31))
+        self.scrollArea_4 = QScrollArea(self.centralwidget)
+        self.scrollArea_4.setObjectName(u"scrollArea_4")
+        self.scrollArea_4.setGeometry(QRect(10, 580, 1101, 81))
+        self.scrollArea_4.setWidgetResizable(True)
+        self.scrollAreaWidgetContents_4 = QWidget()
+        self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 1099, 79))
+        self.textBrowser = QTextBrowser(self.scrollAreaWidgetContents_4)
+        self.textBrowser.setObjectName(u"textBrowser")
+        self.textBrowser.setGeometry(QRect(0, 0, 1101, 81))
+        self.scrollArea_4.setWidget(self.scrollAreaWidgetContents_4)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1123, 21))
+        self.menubar.setGeometry(QRect(0, 0, 1114, 21))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
-        self.label_18.setFont(font2)
-        self.label_19.setFont(font2)
-        self.label_20.setFont(font2)
-        self.label_17.setFont(font2)
         self.retranslateUi(MainWindow)
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -362,25 +325,22 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"standart temperature[\u00b0 C]:", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"coordinate size X:", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"coordinate size Y:", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"Temperature limit[\u00b0 C]:", None))
         self.label_16.setText(QCoreApplication.translate("MainWindow", u"limit of steps in time:", None))
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"specific heat capacity[ kJ/(kg\u22c5C)]", None))
-        self.label_4.setText(QCoreApplication.translate("MainWindow", u"step in X[m]:", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"step in time[S/2]:", None))
-        self.label_6.setText(QCoreApplication.translate("MainWindow", u"step in Y[m]:", None))
         self.checkBox.setText(QCoreApplication.translate("MainWindow", u"rotate matrix on 90\u00b0", None))
         self.label_22.setText(QCoreApplication.translate("MainWindow", u"thermal conduction:", None))
         self.label_23.setText(QCoreApplication.translate("MainWindow", u"density:", None))
-        self.label_10.setText(QCoreApplication.translate("MainWindow", u"All fields are required", None))
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"step in X[m]:", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"coordinate size X:", None))
+        self.label_6.setText(QCoreApplication.translate("MainWindow", u"step in Y[m]:", None))
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"coordinate size Y:", None))
         self.label_12.setText(QCoreApplication.translate("MainWindow", u"y=", None))
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"x=", None))
         self.label_13.setText(QCoreApplication.translate("MainWindow", u"temperature[\u00b0 C]=", None))
         self.label_14.setText(QCoreApplication.translate("MainWindow", u"Create a temperature graphs by function here:", None))
-        self.label_15.setText(QCoreApplication.translate("MainWindow", u"Number of lines of functions mustn't be different", None))
         self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Confirm", None))
-        self.label_11.setText(QCoreApplication.translate("MainWindow", u"All numbers must be real", None))
         self.label_17.setText(QCoreApplication.translate("MainWindow", u"upper border:  f1(x)=", None))
         self.label_18.setText(QCoreApplication.translate("MainWindow", u"right border:  f2(x) =", None))
         self.label_19.setText(QCoreApplication.translate("MainWindow", u"lower border:  f3(x)=", None))
@@ -388,7 +348,12 @@ class Ui_MainWindow(object):
         self.label_21.setText(QCoreApplication.translate("MainWindow", u"You can make border values, which will be consant and heat matrix, here:", None))
         self.label_24.setText("")
         self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"Watch", None))
-        self.label_25.setText(QCoreApplication.translate("MainWindow", u"", None))
+        self.label_25.setText("")
         self.label_26.setText("")
+        self.textBrowser.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
     # retranslateUi
 

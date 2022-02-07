@@ -10,7 +10,7 @@ import os
 import compiles
 from PIL import Image
 import shutil
-
+import pip
 
 
 def C_to_rgb(Temperature, Temperature_limit):
@@ -39,8 +39,191 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         self.ui.pushButton.clicked.connect(self.bp)
         self.ui.pushButton_2.clicked.connect(self.watch)
-    def watch(self):
-        global conf
+    def check(self, warerror):
+        text_browser = ""
+        if(self.ui.lineEdit.text() == ""):
+            text_browser=text_browser+"ERROR: 'coordinate size X' - empty \n"
+        else:
+            try:
+                check = float(self.ui.lineEdit.text())
+                if(check>0):
+                    pass
+                else:
+                    text_browser=text_browser+"ERROR: 'coordinate size X' - unreal value \n"
+            except:
+                text_browser=text_browser+"ERROR: 'coordinate size X' - unreal value \n"
+
+        if(self.ui.lineEdit_2.text() == ""):
+            text_browser=text_browser+"ERROR: 'coordinate size Y' - empty \n"
+        else:
+            try:
+                check = float(self.ui.lineEdit_2.text())
+                if(check>0):
+                    pass
+                else:
+                    text_browser=text_browser+"ERROR: 'coordinate size Y' - unreal value \n"
+            except:
+                text_browser=text_browser+"ERROR: 'coordinate size Y' - unreal value \n"
+
+        if(self.ui.lineEdit_4.text() == ""):
+            text_browser=text_browser+warerror+": 'step in time' - empty \n"
+        else:
+            try:
+                check = float(self.ui.lineEdit_4.text())
+                if(check>0):
+                    pass
+                else:
+                    text_browser=text_browser+warerror+": 'step in time' - unreal value \n"
+            except:
+                text_browser=text_browser+warerror+": 'step in time' - unreal value \n"
+
+        if(self.ui.lineEdit_5.text() == ""):
+            text_browser=text_browser+warerror+": 'step in X' - empty \n"
+        else:
+            try:
+                check = float(self.ui.lineEdit_5.text())
+                if(check>0):
+                    pass
+                else:
+                    text_browser=text_browser+warerror+": 'step in X' - unreal value \n"
+            except:
+                text_browser=text_browser+warerror+": 'step in X' - unreal value \n"
+
+        if(self.ui.lineEdit_6.text() == ""):
+            text_browser=text_browser+warerror+": 'step in Y' - empty \n"
+        else:
+            try:
+                check = float(self.ui.lineEdit_6.text())
+                if(check>0):
+                    pass
+                else:
+                    text_browser=text_browser+warerror+": 'step in Y' - unreal value \n"
+            except:
+                text_browser=text_browser+warerror+": 'step in Y' - unreal value \n"
+
+        if(self.ui.lineEdit_7.text() == ""):
+            text_browser=text_browser+"ERROR: 'standart temperature' - empty \n"
+        else:
+            try:
+                check = float(self.ui.lineEdit_7.text())
+                if(check>-273.16):
+                    pass
+                else:
+                    text_browser=text_browser+"ERROR: 'standart temperature' - unreal value \n"
+            except:
+                text_browser=text_browser+"ERROR: 'standart temperature' - unreal value \n"
+
+        if(self.ui.lineEdit_8.text() == ""):
+            text_browser=text_browser+warerror+": 'specific heat capacity' - empty \n"
+        else:
+            try:
+                check = float(self.ui.lineEdit_8.text())
+                if(check>0):
+                    pass
+                else:
+                    text_browser=text_browser+warerror+": 'specific heat capacity' - unreal value \n"
+            except:
+                text_browser=text_browser+warerror+": 'specific heat capacity' - unreal value \n"
+
+        if(self.ui.lineEdit_14.text() == ""):
+            text_browser=text_browser+warerror+": 'thermal conduction' - empty \n"
+        else:
+            try:
+                check = float(self.ui.lineEdit_14.text())
+                if(check>0):
+                    pass
+                else:
+                    text_browser=text_browser+warerror+": 'thermal conduction' - unreal value \n"
+            except:
+                text_browser=text_browser+warerror+": 'thermal conduction' - unreal value \n"
+
+        if(self.ui.lineEdit_15.text() == ""):
+            text_browser=text_browser+warerror+": 'density' - empty \n"
+        else:
+            try:
+                check = float(self.ui.lineEdit_15.text())
+                if(check>0):
+                    pass
+                else:
+                    text_browser=text_browser+warerror+": 'density' - unreal value \n"
+            except:
+                text_browser=text_browser+warerror+": 'density' - unreal value \n"
+
+        if(self.ui.lineEdit_3.text() == "" and self.ui.lineEdit_9.text()==""):
+            text_browser=text_browser+warerror+": 'Temperature limit' and 'limit of steps in time' - empty \n"
+        else:
+            try:
+                check = float(self.ui.lineEdit_3.text())
+                if(check>0):
+                    pass
+                else:
+                    text_browser=text_browser+warerror+": 'Temperature limit' - unreal value \n"
+            except:
+                if(self.ui.lineEdit_3.text()==""):
+                    pass
+                else:
+                    text_browser=text_browser+warerror+": 'Temperature limit' - unreal value \n"
+            try:
+                check = float(self.ui.lineEdit_9.text())
+                if(check>0):
+                    pass
+                else:
+                    text_browser=text_browser+warerror+": 'limit of steps in time' - unreal value \n"
+            except:
+                if(self.ui.lineEdit_9.text()==""):
+                    pass
+                else:
+                    text_browser=text_browser+warerror+": 'limit of steps in time' - unreal value \n"
+
+        if(self.ui.lineEdit_10.text()==""):
+            pass
+        else:
+            try:
+                check = self.ui.lineEdit_10.text().replace("x","1")
+            except:
+                check = self.ui.lineEdit_10.text()
+            try:
+                check = eval(check)
+            except:
+                text_browser = text_browser+"ERROR: 'left border: f4(x)' - unreal value \n"
+
+        if(self.ui.lineEdit_13.text()==""):
+            pass
+        else:
+            try:
+                check = self.ui.lineEdit_13.text().replace("x","1")
+            except:
+                check = self.ui.lineEdit_13.text()
+            try:
+                check = eval(check)
+            except:
+                text_browser = text_browser+"ERROR: 'upper border: f1(x)' - unreal value \n"
+
+        if(self.ui.lineEdit_11.text()==""):
+            pass
+        else:
+            try:
+                check = self.ui.lineEdit_11.text().replace("x","1")
+            except:
+                check = self.ui.lineEdit_11.text()
+            try:
+                check = eval(check)
+            except:
+                text_browser = text_browser+"ERROR: 'right border: f2(x)' - unreal value \n"
+
+        if(self.ui.lineEdit_12.text()==""):
+            pass
+        else:
+            try:
+                check = self.ui.lineEdit_12.text().replace("x","1")
+            except:
+                check = self.ui.lineEdit_12.text()
+            try:
+                check = eval(check)
+            except:
+                text_browser = text_browser+"ERROR: 'lower border: f3(x)' - unreal value \n"
+
+
         try:
             x_list = (self.ui.textEdit.toPlainText()).split("\n")
             y_list = (self.ui.textEdit_2.toPlainText()).split("\n")
@@ -48,12 +231,57 @@ class MainWindow(QMainWindow):
         except:
             pass
         if (len(x_list)!=len(y_list) or len(x_list)!= len(temperature_list)):
-            self.ui.label_15.setStyleSheet("color: rgba(255,0,0,255);")
+            text_browser=text_browser+"ERROR: numbers of line of functions are different \n"
+        elif(x_list[0]=="" and y_list[0]=="" and temperature_list[0]==""):
+            pass
         else:
-            self.ui.label_15.setStyleSheet("color: rgba(255,0,0,0);")
+            for i in range(len(x_list)):
+                try:
+                    check = x_list[i].replace("x","1")
+                except:
+                    check = x_list[i]
+                try:
+                    check = eval(check)
+                except:
+                    text_browser = text_browser+"ERROR: line number "+str(i+1)+" in 'X' - has unreal value \n"
+
+                if(y_list[i][0]=="<" or y_list[i][0]==">"):
+                    y_list[i]=y_list[i][1::]
+                try:
+                    check = y_list[i].replace("x","1")
+                except:
+                    check = y_list[i]
+                try:
+                    check = eval(check)
+                except:
+                    text_browser = text_browser+"ERROR: line number "+str(i+1)+" in 'Y' - has unreal value \n"
+
+                try:
+                    check = temperature_list[i].replace("x","1")
+                except:
+                    check = temperature_list[i]
+                try:
+                    check = eval(check)
+                except:
+                    text_browser = text_browser+"ERROR: line number "+str(i+1)+" in 'temperature' - has unreal value \n"
+        
+
+        self.ui.textBrowser.setText(text_browser)
+    def watch(self):
+        global conf
+        self.check("WARNING")
         try:
-            self.ui.label_10.setStyleSheet("color: rgba(255,0,0,0);")
-            self.ui.label_11.setStyleSheet("color: rgba(255,0,0,0);")
+            x_list = (self.ui.textEdit.toPlainText()).split("\n")
+            y_list = (self.ui.textEdit_2.toPlainText()).split("\n")
+            temperature_list = (self.ui.textEdit_3.toPlainText()).split("\n")
+        except:
+            pass
+        if (len(x_list)!=len(y_list) or len(x_list)!= len(temperature_list)):
+            pass
+        else:
+            pass
+        try:
+            pass
 
             coordinate_size_X = float(self.ui.lineEdit.text())
             coordinate_size_Y = float(self.ui.lineEdit_2.text())
@@ -225,21 +453,19 @@ class MainWindow(QMainWindow):
                 self.ui.label_25.setText("-273" + " "+" "*int(85*(273/(MAX_TEMPERATURE+273))) +"0"+" "+" "*int(85-85*(273/(MAX_TEMPERATURE+273)))+str(MAX_TEMPERATURE))
             else:
                 self.ui.label_25.setText("-273"+" "*87+str(MAX_TEMPERATURE))
-            self.ui.label_11.setStyleSheet("color: rgba(255,0,0,0);")
-            self.ui.label_10.setStyleSheet("color: rgba(255,0,0,0);")
+            pass
         except:
             if(self.ui.lineEdit.text()=="" or self.ui.lineEdit_2.text()=="" or self.ui.lineEdit_7.text()==""):
-                self.ui.label_10.setStyleSheet("color: rgba(255,0,0,255);")
+                pass
             else:
-                self.ui.label_11.setStyleSheet("color: rgba(255,0,0,255);")
-                self.ui.label_10.setStyleSheet("color: rgba(255,0,0,0);")
+                pass
 
 
     def bp(self):
         global conf
         shutil.rmtree('images')
         os.mkdir("images")
-        self.watch()
+        self.check("ERROR")
         try:
             x_list = (self.ui.textEdit.toPlainText()).split("\n")
             y_list = (self.ui.textEdit_2.toPlainText()).split("\n")
@@ -247,14 +473,10 @@ class MainWindow(QMainWindow):
         except:
             pass
         if (len(x_list)!=len(y_list) or len(x_list)!= len(temperature_list)):
-            self.ui.label_15.setStyleSheet("color: rgba(255,0,0,255);")
+            pass
         else:
-            self.ui.label_15.setStyleSheet("color: rgba(255,0,0,0);")
+            pass
         try:
-            self.watch()
-            self.ui.label_10.setStyleSheet("color: rgba(255,0,0,0);")
-            self.ui.label_11.setStyleSheet("color: rgba(255,0,0,0);")
-
             coordinate_size_X = float(self.ui.lineEdit.text())
             coordinate_size_Y = float(self.ui.lineEdit_2.text())
             
@@ -270,30 +492,53 @@ class MainWindow(QMainWindow):
             conf = configparser.RawConfigParser()
             conf.read("config.conf")
 
-            try:
-                try1 = int(self.ui.lineEdit_10.text())
+            if(len(self.ui.lineEdit_10.text())>0):
+                try1 = self.ui.lineEdit_10.text()
+                try:
+                    result =try1.replace("x",'1')
+                    result = eval(result)
+                except:
+                    result = eval(try1)
+
                 conf.set("field-properties", "left_func_arg", 1)
-            except:
+            else:
                 conf.set("field-properties", "left_func_arg", 0)
 
-            try:
-                try2 = int(self.ui.lineEdit_13.text())
+            if(len(self.ui.lineEdit_13.text())>0):
+                try1 = self.ui.lineEdit_13.text()
+                try:
+                    result =try1.replace("x",'1')
+                    result = eval(result)
+                except:
+                    result = eval(try1)
+
                 conf.set("field-properties", "up_func_arg", 1)
-            except:
+            else:
                 conf.set("field-properties", "up_func_arg", 0)
 
-            try:
-                try3 = int(self.ui.lineEdit_11.text())
+            if(len(self.ui.lineEdit_11.text())>0):
+                try1 = self.ui.lineEdit_11.text()
+                try:
+                    result =try1.replace("x",'1')
+                    result = eval(result)
+                except:
+                    result = eval(try1)
+
                 conf.set("field-properties", "right_func_arg", int(coordinate_size_X-1))
-            except:
+            else:
                 conf.set("field-properties", "right_func_arg", int(coordinate_size_X))
 
-            try:
-                try4 = int(self.ui.lineEdit_12.text())
-                conf.set("field-properties", "bottom_func_arg", int(coordinate_size_Y-1))
-            except:
-                conf.set("field-properties", "bottom_func_arg", int(coordinate_size_Y))
+            if(len(self.ui.lineEdit_12.text())>0):
+                try1 = self.ui.lineEdit_12.text()
+                try:
+                    result =try1.replace("x",'1')
+                    result = eval(result)
+                except:
+                    result = eval(try1)
 
+                conf.set("field-properties", "bottom_func_arg", int(coordinate_size_Y-1))
+            else:
+                conf.set("field-properties", "bottom_func_arg", int(coordinate_size_Y))
 
 
 
@@ -459,15 +704,15 @@ class MainWindow(QMainWindow):
                 save_all=True,
                 duration=30, loop=0)
 
-            self.ui.label_11.setStyleSheet("color: rgba(255,0,0,0);")
-            self.ui.label_10.setStyleSheet("color: rgba(255,0,0,0);")
+            pass
         except:
             if(self.ui.lineEdit_15.text()=="" or self.ui.lineEdit_14.text()=="" or self.ui.lineEdit.text()=="" or self.ui.lineEdit_2.text()=="" or (self.ui.lineEdit_9.text()=="" and self.ui.lineEdit_3.text()=="") or self.ui.lineEdit_4.text()=="" or self.ui.lineEdit_5.text()=="" or self.ui.lineEdit_6.text()=="" or self.ui.lineEdit_7.text()=="" or self.ui.lineEdit_8.text()==""):
-                self.ui.label_10.setStyleSheet("color: rgba(255,0,0,255);")
+                pass
             else:
-                self.ui.label_11.setStyleSheet("color: rgba(255,0,0,255);")
-                self.ui.label_10.setStyleSheet("color: rgba(255,0,0,0);")
+                pass
 if __name__ == '__main__':
+    pip.main(['install', 'pillow'])
+    pip.main(['install', 'PySide6'])
     app = QApplication()
     window = MainWindow()
     window.show()
