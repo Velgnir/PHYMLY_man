@@ -386,7 +386,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.label_7.setText(QCoreApplication.translate("MainWindow", u"standart temperature[\u00b0 C]:", None))
+        self.label_7.setText(QCoreApplication.translate("MainWindow", u"standard temperature[\u00b0 C]:", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"Temperature limit[\u00b0 C]:", None))
         self.label_16.setText(QCoreApplication.translate("MainWindow", u"limit of steps in time:", None))
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"specific heat capacity[ kJ/(kg\u22c5C)]", None))
@@ -394,10 +394,10 @@ class Ui_MainWindow(object):
         self.checkBox.setText(QCoreApplication.translate("MainWindow", u"rotate matrix on 90\u00b0", None))
         self.label_22.setText(QCoreApplication.translate("MainWindow", u"thermal conduction:", None))
         self.label_23.setText(QCoreApplication.translate("MainWindow", u"density:", None))
-        self.label_4.setText(QCoreApplication.translate("MainWindow", u"step in X[m]:", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"coordinate size X:", None))
-        self.label_6.setText(QCoreApplication.translate("MainWindow", u"step in Y[m]:", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"coordinate size Y:", None))
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Step length, X axis [m]", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"Number of steps, X axis[m]:", None))
+        self.label_6.setText(QCoreApplication.translate("MainWindow", u"Step width, Y axis [m]:", None))
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"Number of steps, Y axis[m]", None))
         self.label_12.setText(QCoreApplication.translate("MainWindow", u"y=", None))
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"x=", None))
         self.label_13.setText(QCoreApplication.translate("MainWindow", u"temperature[\u00b0 C]=", None))

@@ -40,12 +40,35 @@ class MainWindow(QMainWindow):
         self.ui.pushButton.clicked.connect(self.bp)
         self.ui.pushButton_2.clicked.connect(self.check)
     def check(self, warerror):
+        self.ui.lineEdit.setStyleSheet("background-color: #A3BE8C;")
+        self.ui.lineEdit_2.setStyleSheet("background-color: #A3BE8C;")
+        self.ui.lineEdit_3.setStyleSheet("background-color: #A3BE8C;")
+        self.ui.lineEdit_7.setStyleSheet("background-color: #A3BE8C;")
+        self.ui.lineEdit_9.setStyleSheet("background-color: #A3BE8C;")
+        self.ui.lineEdit_4.setStyleSheet("background-color: #A3BE8C;")
+        self.ui.lineEdit_5.setStyleSheet("background-color: #A3BE8C;")
+        self.ui.lineEdit_6.setStyleSheet("background-color: #A3BE8C;")
+        self.ui.lineEdit_8.setStyleSheet("background-color: #A3BE8C;")
+        self.ui.lineEdit_10.setStyleSheet("background-color: #A3BE8C;")
+        self.ui.lineEdit_11.setStyleSheet("background-color: #A3BE8C;")
+        self.ui.lineEdit_12.setStyleSheet("background-color: #A3BE8C;")
+        self.ui.lineEdit_13.setStyleSheet("background-color: #A3BE8C;")
+        self.ui.lineEdit_14.setStyleSheet("background-color: #A3BE8C;")
+        self.ui.lineEdit_15.setStyleSheet("background-color: #A3BE8C;")
+
+        self.ui.textEdit.setStyleSheet("background-color: #A3BE8C;")
+        self.ui.textEdit_2.setStyleSheet("background-color: #A3BE8C;")
+        self.ui.textEdit_3.setStyleSheet("background-color: #A3BE8C;")
+
         errors = 0
         text_browser = ""
+        col = "#BF616A;"
         if (warerror==False):
             warerror = "WARNING"
+            col = "#EBCB8B;"
         if(self.ui.lineEdit.text() == ""):
             text_browser=text_browser+"ERROR: 'coordinate size X' - empty \n"
+            self.ui.lineEdit.setStyleSheet("background-color: #BF616A;")
         else:
             try:
                 check = float(self.ui.lineEdit.text())
@@ -53,11 +76,14 @@ class MainWindow(QMainWindow):
                     pass
                 else:
                     text_browser=text_browser+"ERROR: 'coordinate size X' - unreal value \n"
+                    self.ui.lineEdit.setStyleSheet("background-color: #BF616A;")
             except:
                 text_browser=text_browser+"ERROR: 'coordinate size X' - unreal value \n"
+                self.ui.lineEdit.setStyleSheet("background-color: #BF616A;")
 
         if(self.ui.lineEdit_2.text() == ""):
             text_browser=text_browser+"ERROR: 'coordinate size Y' - empty \n"
+            self.ui.lineEdit_2.setStyleSheet("background-color: #BF616A;")
         else:
             try:
                 check = float(self.ui.lineEdit_2.text())
@@ -65,11 +91,14 @@ class MainWindow(QMainWindow):
                     pass
                 else:
                     text_browser=text_browser+"ERROR: 'coordinate size Y' - unreal value \n"
+                    self.ui.lineEdit_2.setStyleSheet("background-color: #BF616A;")
             except:
                 text_browser=text_browser+"ERROR: 'coordinate size Y' - unreal value \n"
+                self.ui.lineEdit_2.setStyleSheet("background-color: #BF616A;")
 
         if(self.ui.lineEdit_4.text() == ""):
             text_browser=text_browser+warerror+": 'step in time' - empty \n"
+            self.ui.lineEdit_4.setStyleSheet("background-color: "+col)
         else:
             try:
                 check = float(self.ui.lineEdit_4.text())
@@ -77,11 +106,14 @@ class MainWindow(QMainWindow):
                     pass
                 else:
                     text_browser=text_browser+warerror+": 'step in time' - unreal value \n"
+                    self.ui.lineEdit_4.setStyleSheet("background-color: "+col)
             except:
                 text_browser=text_browser+warerror+": 'step in time' - unreal value \n"
+                self.ui.lineEdit_4.setStyleSheet("background-color: "+col)
 
         if(self.ui.lineEdit_5.text() == ""):
             text_browser=text_browser+warerror+": 'step in X' - empty \n"
+            self.ui.lineEdit_5.setStyleSheet("background-color: "+col)
         else:
             try:
                 check = float(self.ui.lineEdit_5.text())
@@ -89,11 +121,14 @@ class MainWindow(QMainWindow):
                     pass
                 else:
                     text_browser=text_browser+warerror+": 'step in X' - unreal value \n"
+                    self.ui.lineEdit_5.setStyleSheet("background-color: "+col)
             except:
                 text_browser=text_browser+warerror+": 'step in X' - unreal value \n"
+                self.ui.lineEdit_5.setStyleSheet("background-color: "+col)
 
         if(self.ui.lineEdit_6.text() == ""):
             text_browser=text_browser+warerror+": 'step in Y' - empty \n"
+            self.ui.lineEdit_6.setStyleSheet("background-color: "+col)
         else:
             try:
                 check = float(self.ui.lineEdit_6.text())
@@ -101,11 +136,14 @@ class MainWindow(QMainWindow):
                     pass
                 else:
                     text_browser=text_browser+warerror+": 'step in Y' - unreal value \n"
+                    self.ui.lineEdit_6.setStyleSheet("background-color: "+col)
             except:
                 text_browser=text_browser+warerror+": 'step in Y' - unreal value \n"
+                self.ui.lineEdit_6.setStyleSheet("background-color: "+col)
 
         if(self.ui.lineEdit_7.text() == ""):
             text_browser=text_browser+"ERROR: 'standart temperature' - empty \n"
+            self.ui.lineEdit_7.setStyleSheet("background-color: #BF616A;")
         else:
             try:
                 check = float(self.ui.lineEdit_7.text())
@@ -113,11 +151,14 @@ class MainWindow(QMainWindow):
                     pass
                 else:
                     text_browser=text_browser+"ERROR: 'standart temperature' - unreal value \n"
+                    self.ui.lineEdit_7.setStyleSheet("background-color: #BF616A;")
             except:
                 text_browser=text_browser+"ERROR: 'standart temperature' - unreal value \n"
+                self.ui.lineEdit_7.setStyleSheet("background-color: #BF616A;")
 
         if(self.ui.lineEdit_8.text() == ""):
             text_browser=text_browser+warerror+": 'specific heat capacity' - empty \n"
+            self.ui.lineEdit_8.setStyleSheet("background-color: "+col)
         else:
             try:
                 check = float(self.ui.lineEdit_8.text())
@@ -125,11 +166,14 @@ class MainWindow(QMainWindow):
                     pass
                 else:
                     text_browser=text_browser+warerror+": 'specific heat capacity' - unreal value \n"
+                    self.ui.lineEdit_8.setStyleSheet("background-color: "+col)
             except:
                 text_browser=text_browser+warerror+": 'specific heat capacity' - unreal value \n"
+                self.ui.lineEdit_8.setStyleSheet("background-color: "+col)
 
         if(self.ui.lineEdit_14.text() == ""):
             text_browser=text_browser+warerror+": 'thermal conduction' - empty \n"
+            self.ui.lineEdit_14.setStyleSheet("background-color: "+col)
         else:
             try:
                 check = float(self.ui.lineEdit_14.text())
@@ -137,11 +181,14 @@ class MainWindow(QMainWindow):
                     pass
                 else:
                     text_browser=text_browser+warerror+": 'thermal conduction' - unreal value \n"
+                    self.ui.lineEdit_14.setStyleSheet("background-color: "+col)
             except:
                 text_browser=text_browser+warerror+": 'thermal conduction' - unreal value \n"
+                self.ui.lineEdit_14.setStyleSheet("background-color: "+col)
 
         if(self.ui.lineEdit_15.text() == ""):
             text_browser=text_browser+warerror+": 'density' - empty \n"
+            self.ui.lineEdit_15.setStyleSheet("background-color: "+col)
         else:
             try:
                 check = float(self.ui.lineEdit_15.text())
@@ -149,11 +196,15 @@ class MainWindow(QMainWindow):
                     pass
                 else:
                     text_browser=text_browser+warerror+": 'density' - unreal value \n"
+                    self.ui.lineEdit_15.setStyleSheet("background-color: "+col)
             except:
                 text_browser=text_browser+warerror+": 'density' - unreal value \n"
+                self.ui.lineEdit_15.setStyleSheet("background-color: "+col)
 
         if(self.ui.lineEdit_3.text() == "" and self.ui.lineEdit_9.text()==""):
             text_browser=text_browser+warerror+": 'Temperature limit' and 'limit of steps in time' - empty \n"
+            self.ui.lineEdit_3.setStyleSheet("background-color: "+col)
+            self.ui.lineEdit_9.setStyleSheet("background-color: "+col)
         else:
             try:
                 check = float(self.ui.lineEdit_3.text())
@@ -161,22 +212,26 @@ class MainWindow(QMainWindow):
                     pass
                 else:
                     text_browser=text_browser+warerror+": 'Temperature limit' - unreal value \n"
+                    self.ui.lineEdit_3.setStyleSheet("background-color: "+col)
             except:
                 if(self.ui.lineEdit_3.text()==""):
                     pass
                 else:
                     text_browser=text_browser+warerror+": 'Temperature limit' - unreal value \n"
+                    self.ui.lineEdit_3.setStyleSheet("background-color: "+col)
             try:
                 check = float(self.ui.lineEdit_9.text())
                 if(check>0 and check < 2147483647):
                     pass
                 else:
                     text_browser=text_browser+warerror+": 'limit of steps in time' - unreal value \n"
+                    self.ui.lineEdit_9.setStyleSheet("background-color: "+col)
             except:
                 if(self.ui.lineEdit_9.text()==""):
                     pass
                 else:
                     text_browser=text_browser+warerror+": 'limit of steps in time' - unreal value \n"
+                    self.ui.lineEdit_9.setStyleSheet("background-color: "+col)
 
         if(self.ui.lineEdit_10.text()==""):
             pass
@@ -189,6 +244,7 @@ class MainWindow(QMainWindow):
                 check = eval(check)
             except:
                 text_browser = text_browser+"ERROR: 'left border: f4(x)' - unreal value \n"
+                self.ui.lineEdit_10.setStyleSheet("background-color: #BF616A;")
 
         if(self.ui.lineEdit_13.text()==""):
             pass
@@ -201,6 +257,7 @@ class MainWindow(QMainWindow):
                 check = eval(check)
             except:
                 text_browser = text_browser+"ERROR: 'upper border: f1(x)' - unreal value \n"
+                self.ui.lineEdit_13.setStyleSheet("background-color: #BF616A;")
 
         if(self.ui.lineEdit_11.text()==""):
             pass
@@ -213,6 +270,7 @@ class MainWindow(QMainWindow):
                 check = eval(check)
             except:
                 text_browser = text_browser+"ERROR: 'right border: f2(x)' - unreal value \n"
+                self.ui.lineEdit_11.setStyleSheet("background-color: #BF616A;")
 
         if(self.ui.lineEdit_12.text()==""):
             pass
@@ -225,6 +283,7 @@ class MainWindow(QMainWindow):
                 check = eval(check)
             except:
                 text_browser = text_browser+"ERROR: 'lower border: f3(x)' - unreal value \n"
+                self.ui.lineEdit_12.setStyleSheet("background-color: #BF616A;")
 
 
         try:
@@ -235,6 +294,9 @@ class MainWindow(QMainWindow):
             pass
         if (len(x_list)!=len(y_list) or len(x_list)!= len(temperature_list) or (x_list[0]=="" and (temperature_list[0]!="" or y_list[0]!="")) or (y_list[0]=="" and (temperature_list[0]!="" or x_list[0]!="")) or (temperature_list[0]=="" and (x_list[0]!="" or y_list[0]!="")) ):
             text_browser=text_browser+"ERROR: numbers of line of functions are different \n"
+            self.ui.textEdit.setStyleSheet("background-color: #BF616A;")
+            self.ui.textEdit_2.setStyleSheet("background-color: #BF616A;")
+            self.ui.textEdit_3.setStyleSheet("background-color: #BF616A;")
         elif(x_list[0] =="" and y_list[0]=="" and temperature_list[0]==""):
             pass
         else:
@@ -247,6 +309,7 @@ class MainWindow(QMainWindow):
                     check = eval(check)
                 except:
                     text_browser = text_browser+"ERROR: line number "+str(i+1)+" in 'X' - has unreal value \n"
+                    self.ui.textEdit.setStyleSheet("background-color: #BF616A;")
 
                 if(y_list[i][0]=="<" or y_list[i][0]==">"):
                     y_list[i]=y_list[i][1::]
@@ -258,6 +321,7 @@ class MainWindow(QMainWindow):
                     check = eval(check)
                 except:
                     text_browser = text_browser+"ERROR: line number "+str(i+1)+" in 'Y' - has unreal value \n"
+                    self.ui.textEdit_2.setStyleSheet("background-color: #BF616A;")
 
                 try:
                     check = temperature_list[i].replace("x","1")
@@ -267,6 +331,7 @@ class MainWindow(QMainWindow):
                     check = eval(check)
                 except:
                     text_browser = text_browser+"ERROR: line number "+str(i+1)+" in 'temperature' - has unreal value \n"
+                    self.ui.textEdit_3.setStyleSheet("background-color: #BF616A;")
         
 
         self.ui.textBrowser.setText(text_browser)
