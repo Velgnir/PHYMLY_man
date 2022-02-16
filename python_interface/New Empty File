@@ -38,18 +38,15 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.ui.pushButton.clicked.connect(self.bp)
-        self.ui.pushButton_2.clicked.connect(self.check)
+        self.ui.pushButton_2.clicked.connect(self.watch)
     def check(self, warerror):
-        errors = 0
         text_browser = ""
-        if (warerror==False):
-            warerror = "WARNING"
         if(self.ui.lineEdit.text() == ""):
             text_browser=text_browser+"ERROR: 'coordinate size X' - empty \n"
         else:
             try:
                 check = float(self.ui.lineEdit.text())
-                if(check>0 and check < 2147483647):
+                if(check>0):
                     pass
                 else:
                     text_browser=text_browser+"ERROR: 'coordinate size X' - unreal value \n"
@@ -73,7 +70,7 @@ class MainWindow(QMainWindow):
         else:
             try:
                 check = float(self.ui.lineEdit_4.text())
-                if(check>0 and check < 2147483647):
+                if(check>0):
                     pass
                 else:
                     text_browser=text_browser+warerror+": 'step in time' - unreal value \n"
@@ -85,7 +82,7 @@ class MainWindow(QMainWindow):
         else:
             try:
                 check = float(self.ui.lineEdit_5.text())
-                if(check>0 and check < 2147483647):
+                if(check>0):
                     pass
                 else:
                     text_browser=text_browser+warerror+": 'step in X' - unreal value \n"
@@ -97,7 +94,7 @@ class MainWindow(QMainWindow):
         else:
             try:
                 check = float(self.ui.lineEdit_6.text())
-                if(check>0 and check < 2147483647):
+                if(check>0):
                     pass
                 else:
                     text_browser=text_browser+warerror+": 'step in Y' - unreal value \n"
@@ -109,7 +106,7 @@ class MainWindow(QMainWindow):
         else:
             try:
                 check = float(self.ui.lineEdit_7.text())
-                if(check>-273.16 and check < 2147483647):
+                if(check>-273.16):
                     pass
                 else:
                     text_browser=text_browser+"ERROR: 'standart temperature' - unreal value \n"
@@ -121,7 +118,7 @@ class MainWindow(QMainWindow):
         else:
             try:
                 check = float(self.ui.lineEdit_8.text())
-                if(check>0 and check < 2147483647):
+                if(check>0):
                     pass
                 else:
                     text_browser=text_browser+warerror+": 'specific heat capacity' - unreal value \n"
@@ -133,7 +130,7 @@ class MainWindow(QMainWindow):
         else:
             try:
                 check = float(self.ui.lineEdit_14.text())
-                if(check>0 and check < 2147483647):
+                if(check>0):
                     pass
                 else:
                     text_browser=text_browser+warerror+": 'thermal conduction' - unreal value \n"
@@ -145,7 +142,7 @@ class MainWindow(QMainWindow):
         else:
             try:
                 check = float(self.ui.lineEdit_15.text())
-                if(check>0 and check < 2147483647):
+                if(check>0):
                     pass
                 else:
                     text_browser=text_browser+warerror+": 'density' - unreal value \n"
@@ -157,7 +154,7 @@ class MainWindow(QMainWindow):
         else:
             try:
                 check = float(self.ui.lineEdit_3.text())
-                if(check>0 and check < 2147483647):
+                if(check>0):
                     pass
                 else:
                     text_browser=text_browser+warerror+": 'Temperature limit' - unreal value \n"
@@ -168,7 +165,7 @@ class MainWindow(QMainWindow):
                     text_browser=text_browser+warerror+": 'Temperature limit' - unreal value \n"
             try:
                 check = float(self.ui.lineEdit_9.text())
-                if(check>0 and check < 2147483647):
+                if(check>0):
                     pass
                 else:
                     text_browser=text_browser+warerror+": 'limit of steps in time' - unreal value \n"
@@ -233,9 +230,9 @@ class MainWindow(QMainWindow):
             temperature_list = (self.ui.textEdit_3.toPlainText()).split("\n")
         except:
             pass
-        if (len(x_list)!=len(y_list) or len(x_list)!= len(temperature_list) or (x_list[0]=="" and (temperature_list[0]!="" or y_list[0]!="")) or (y_list[0]=="" and (temperature_list[0]!="" or x_list[0]!="")) or (temperature_list[0]=="" and (x_list[0]!="" or y_list[0]!="")) ):
+        if (len(x_list)!=len(y_list) or len(x_list)!= len(temperature_list)):
             text_browser=text_browser+"ERROR: numbers of line of functions are different \n"
-        elif(x_list[0] =="" and y_list[0]=="" and temperature_list[0]==""):
+        elif(x_list[0]=="" and y_list[0]=="" and temperature_list[0]==""):
             pass
         else:
             for i in range(len(x_list)):
@@ -270,16 +267,22 @@ class MainWindow(QMainWindow):
         
 
         self.ui.textBrowser.setText(text_browser)
-        
+    def watch(self):
         global conf
+        self.check("WARNING")
         try:
             x_list = (self.ui.textEdit.toPlainText()).split("\n")
             y_list = (self.ui.textEdit_2.toPlainText()).split("\n")
             temperature_list = (self.ui.textEdit_3.toPlainText()).split("\n")
         except:
             pass
-
+        if (len(x_list)!=len(y_list) or len(x_list)!= len(temperature_list)):
+            pass
+        else:
+            pass
         try:
+            pass
+
             coordinate_size_X = float(self.ui.lineEdit.text())
             coordinate_size_Y = float(self.ui.lineEdit_2.text())
 
@@ -382,13 +385,6 @@ class MainWindow(QMainWindow):
                     matrix[1][i] = int(eval(result))
             except:
                 pass
-            for x in range(len(matrix)):
-                for y in range(len(matrix[x])):
-                    if(matrix[x][y]<-273.15 or matrix[x][y]>2147483647):
-                        errors += 1
-                        text_browser = text_browser + "ERROR: as a result of using plots in X: " +str(y)+" and Y: "+str(x)+" - unreal value \n"
-
-
             MAX_TEMPERATURE = -273.15
             for row in matrix:
                 for el in row:
@@ -441,13 +437,13 @@ class MainWindow(QMainWindow):
             original_image = Image.open('python_interface/WATCH2.png')
 
             if(coordinate_size_X>181 and coordinate_size_X>=coordinate_size_Y):
-                self.ui.label_24.setGeometry(QRect(850, int(170+(181 -181*(coordinate_size_Y/coordinate_size_X))/2), 181, int(181*(coordinate_size_Y/coordinate_size_X))))
+                self.ui.label_24.setGeometry(QRect(810, int(170+(181 -181*(coordinate_size_Y/coordinate_size_X))/2), 181, int(181*(coordinate_size_Y/coordinate_size_X))))
                 resized_image = original_image.resize((181, int(181*(coordinate_size_Y/coordinate_size_X))))
             elif(coordinate_size_Y>181 and coordinate_size_Y>=coordinate_size_X):
-                self.ui.label_24.setGeometry(QRect(int(850+(181 -181*(coordinate_size_X/coordinate_size_Y))/2), 170, int(181*(coordinate_size_X/coordinate_size_Y)), 181))
+                self.ui.label_24.setGeometry(QRect(int(810+(181 -181*(coordinate_size_X/coordinate_size_Y))/2), 170, int(181*(coordinate_size_X/coordinate_size_Y)), 181))
                 resized_image = original_image.resize((int(181*(coordinate_size_X/coordinate_size_Y)), 181))
             elif(coordinate_size_Y<=181 and coordinate_size_X<=181):
-                self.ui.label_24.setGeometry(QRect(850+int((181-coordinate_size_X)/2), 170+int((181-coordinate_size_Y)/2), coordinate_size_X, coordinate_size_Y))
+                self.ui.label_24.setGeometry(QRect(810+int((181-coordinate_size_X)/2), 170+int((181-coordinate_size_Y)/2), coordinate_size_X, coordinate_size_Y))
                 resized_image = original_image.resize((coordinate_size_X, coordinate_size_Y))
             resized_image.save('python_interface/WATCH2.png')
             self.ui.label_26.setPixmap(QPixmap("python_interface/WATCH1.png"))
@@ -459,22 +455,26 @@ class MainWindow(QMainWindow):
                 self.ui.label_25.setText("-273"+" "*87+str(MAX_TEMPERATURE))
             pass
         except:
-            pass
-        self.ui.textBrowser.setText(text_browser)
-        if(errors>0):
-            return 1
+            if(self.ui.lineEdit.text()=="" or self.ui.lineEdit_2.text()=="" or self.ui.lineEdit_7.text()==""):
+                pass
+            else:
+                pass
+
 
     def bp(self):
         global conf
         shutil.rmtree('images')
         os.mkdir("images")
-        if(self.check("ERROR") == 1):
-            return 0
+        self.check("ERROR")
         try:
             x_list = (self.ui.textEdit.toPlainText()).split("\n")
             y_list = (self.ui.textEdit_2.toPlainText()).split("\n")
             temperature_list = (self.ui.textEdit_3.toPlainText()).split("\n")
         except:
+            pass
+        if (len(x_list)!=len(y_list) or len(x_list)!= len(temperature_list)):
+            pass
+        else:
             pass
         try:
             coordinate_size_X = float(self.ui.lineEdit.text())
