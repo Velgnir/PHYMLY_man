@@ -7,8 +7,10 @@ set(CMAKE_CXX_STANDARD 17)
 
 # Options
 set(WARNINGS_AS_ERRORS ON)
+
+
 set(ENABLE_PVS_STUDIO OFF)
-set(ENABLE_SANITIZERS ON) # Option for the test builds. Do not use it in the production builds.
+set(ENABLE_SANITIZERS OFF) # Option for the test builds. Do not use it in the production builds.
 
 if (NOT CMAKE_BUILD_TYPE)
 	set(CMAKE_BUILD_TYPE Release)
@@ -26,7 +28,23 @@ add_executable(${PROJECT_NAME} src/main.cpp src/formula.cpp src/files/config_fil
 # Add external packages
 find_package(Boost 1.71.0 COMPONENTS program_options REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
-target_link_libraries(${PROJECT_NAME} Boost::program_options)
+
+find_package(MPI REQUIRED)
+
+include_directories(${MPI_INCLUDE_PATH})
+
+target_link_libraries(${PROJECT_NAME} Boost::program_options ${MPI_LIBRARIES})
+
+
+if(MPI_COMPILE_FLAGS)
+    set_target_properties(thermal_conductivity PROPERTIES
+            COMPILE_FLAGS "${MPI_COMPILE_FLAGS}")
+endif()
+
+if(MPI_LINK_FLAGS)
+    set_target_properties(thermal_conductivity PROPERTIES
+            LINK_FLAGS "${MPI_LINK_FLAGS}")
+endif()
 
 # set output directory (bin)
 set_target_properties(${PROJECT_NAME}

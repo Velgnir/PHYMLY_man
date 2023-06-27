@@ -1,6 +1,10 @@
 import sys
 import os.path
+import pip
+
+
 import configparser
+from configparser import ConfigParser
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtGui import QPixmap
 from PySide6 import QtWidgets
@@ -10,7 +14,6 @@ import os
 import compiles
 from PIL import Image
 import shutil
-import pip
 
 
 def C_to_rgb(Temperature, Temperature_limit):
@@ -37,8 +40,13 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__(parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.ui.spinBox.setValue(1)
         self.ui.pushButton.clicked.connect(self.bp)
         self.ui.pushButton_2.clicked.connect(self.check)
+        self.ui.pushButton_3.clicked.connect(self.save)
+        self.ui.pushButton_4.clicked.connect(self.restore)
+
+
     def check(self, warerror):
         self.ui.lineEdit.setStyleSheet("background-color: #A3BE8C;")
         self.ui.lineEdit_2.setStyleSheet("background-color: #A3BE8C;")
@@ -59,6 +67,7 @@ class MainWindow(QMainWindow):
         self.ui.textEdit.setStyleSheet("background-color: #A3BE8C;")
         self.ui.textEdit_2.setStyleSheet("background-color: #A3BE8C;")
         self.ui.textEdit_3.setStyleSheet("background-color: #A3BE8C;")
+        self.ui.spinBox.setStyleSheet("background-color: #A3BE8C;")
 
         errors = 0
         text_browser = ""
@@ -66,6 +75,10 @@ class MainWindow(QMainWindow):
         if (warerror==False):
             warerror = "WARNING"
             col = "#EBCB8B;"
+        if(self.ui.spinBox.value()==0):
+            text_browser=text_browser+warerror+": 'number of calculating threads' - impossible number \n"
+            self.ui.spinBox.setStyleSheet("background-color: "+col)
+            errors +=1
         if(self.ui.lineEdit.text() == ""):
             text_browser=text_browser+"ERROR: 'coordinate size X' - empty \n"
             self.ui.lineEdit.setStyleSheet("background-color: #BF616A;")
@@ -529,6 +542,155 @@ class MainWindow(QMainWindow):
         if(errors>0):
             return 1
 
+    def save(self):
+        global conf
+        if(self.check("WARNING") == 1):
+            return 0
+        try:
+            x_list = (self.ui.textEdit.toPlainText()).split("\n")
+            y_list = (self.ui.textEdit_2.toPlainText()).split("\n")
+            temperature_list = (self.ui.textEdit_3.toPlainText()).split("\n")
+        except:
+            print("ERROR 1")
+        coordinate_size_X = float(self.ui.lineEdit.text())
+
+        coordinate_size_Y = float(self.ui.lineEdit_2.text())
+            
+        step_in_time = float(self.ui.lineEdit_4.text())
+        step_in_X = float(self.ui.lineEdit_5.text())
+        step_in_Y = float(self.ui.lineEdit_6.text())
+        standart_temperature = float(self.ui.lineEdit_7.text())
+        heat_capacity = float(self.ui.lineEdit_8.text())
+        density = float(self.ui.lineEdit_15.text())
+        thermal_conduction = float(self.ui.lineEdit_14.text())
+            
+
+        conf = configparser.RawConfigParser()
+        conf.read("config.conf")
+
+        if(len(self.ui.lineEdit_10.text())>0):
+            try1 = self.ui.lineEdit_10.text()
+            try:
+                result =try1.replace("x",'1')
+                result = eval(result)
+            except:
+                result = eval(try1)
+
+            conf.set("field-properties", "left_func_arg", 1)
+        else:
+            conf.set("field-properties", "left_func_arg", 0)
+
+        if(len(self.ui.lineEdit_13.text())>0):
+            try1 = self.ui.lineEdit_13.text()
+            try:
+                result =try1.replace("x",'1')
+                result = eval(result)
+            except:
+                result = eval(try1)
+
+            conf.set("field-properties", "up_func_arg", 1)
+        else:
+            conf.set("field-properties", "up_func_arg", 0)
+
+        if(len(self.ui.lineEdit_11.text())>0):
+            try1 = self.ui.lineEdit_11.text()
+            try:
+                result =try1.replace("x",'1')
+                result = eval(result)
+            except:
+                result = eval(try1)
+
+            conf.set("field-properties", "right_func_arg", int(coordinate_size_X-1))
+        else:
+            conf.set("field-properties", "right_func_arg", int(coordinate_size_X))
+
+        if(len(self.ui.lineEdit_12.text())>0):
+            try1 = self.ui.lineEdit_12.text()
+            try:
+                result =try1.replace("x",'1')
+                result = eval(result)
+            except:
+                result = eval(try1)
+
+            conf.set("field-properties", "bottom_func_arg", int(coordinate_size_Y-1))
+        else:
+            conf.set("field-properties", "bottom_func_arg", int(coordinate_size_Y))
+
+        try:
+            cycle_limit = int(self.ui.lineEdit_9.text())
+            conf.set("main", "max_number_of_cycles", cycle_limit)
+        except:
+            conf.set("main", "max_number_of_cycles", -1)
+            temperature_limit = float(self.ui.lineEdit_3.text())
+            conf.set("main", "temperature_limit", temperature_limit)
+        try:
+            temperature_limit = float(self.ui.lineEdit_3.text())
+            conf.set("main", "temperature_limit", temperature_limit)
+        except:
+            conf.set("main", "temperature_limit", -275)
+
+        conf.set("field-properties", "width", int(coordinate_size_X))
+        conf.set("field-properties", "height", int(coordinate_size_Y))
+
+        conf.set("main", "delta_x", step_in_X)
+        conf.set("main", "delta_t", step_in_time)
+        conf.set("main", "delta_y", step_in_Y)
+        conf.set("main", "specific_heat_capacity", heat_capacity)
+        conf.set("main", "density", density)
+        conf.set("main", "thermal_conduction", thermal_conduction)
+        with open("config.conf", "w") as config:
+            conf.write(config)
+
+        conf = configparser.RawConfigParser()
+        conf.read("interface_additional.conf")
+        left_function = self.ui.lineEdit_10.text()
+        top_function = self.ui.lineEdit_13.text()
+        right_function = self.ui.lineEdit_11.text()
+        bottom_function = self.ui.lineEdit_12.text()
+        x_list = self.ui.textEdit.toPlainText()
+        y_list = self.ui.textEdit_2.toPlainText()
+        temperature_list = self.ui.textEdit_3.toPlainText()
+        standart_temperature_to_SAVE = self.ui.lineEdit_7.text()
+
+        conf.set("main", "standart", standart_temperature_to_SAVE)
+        conf.set("main", "x", x_list)
+        conf.set("main", "y", y_list)
+        conf.set("main", "temperature", temperature_list)
+        conf.set("main", "left", left_function)
+        conf.set("main", "top", top_function)
+        conf.set("main", "right", right_function)
+        conf.set("main", "bottom", bottom_function)
+
+        with open("interface_additional.conf", "w") as config:
+            conf.write(config)
+
+    def restore(self):
+        config_object = ConfigParser()
+        config_object.read("config.conf")
+        userinfo = config_object["main"]
+        self.ui.lineEdit_5.setText(userinfo["delta_x"])
+        self.ui.lineEdit_6.setText(userinfo["delta_y"])
+        self.ui.lineEdit_4.setText(userinfo["delta_t"])
+        self.ui.lineEdit_15.setText(userinfo["density"])
+        self.ui.lineEdit_3.setText(userinfo["temperature_limit"])
+        self.ui.lineEdit_14.setText(userinfo["thermal_conduction"])
+        self.ui.lineEdit_9.setText(userinfo["max_number_of_cycles"])
+        self.ui.lineEdit_8.setText(userinfo["specific_heat_capacity"])
+        userinfo = config_object["field-properties"]
+        self.ui.lineEdit.setText(userinfo["width"])
+        self.ui.lineEdit_2.setText(userinfo["height"])
+        config_object = ConfigParser()
+        config_object.read("interface_additional.conf")
+        userinfo = config_object["main"]
+        self.ui.lineEdit_7.setText(userinfo["standart"])
+        self.ui.textEdit.setText(userinfo["x"])
+        self.ui.textEdit_2.setText(userinfo["y"])
+        self.ui.lineEdit_10.setText(userinfo["left"])
+        self.ui.textEdit_3.setText(userinfo["temperature"])
+        self.ui.lineEdit_13.setText(userinfo["top"])
+        self.ui.lineEdit_11.setText(userinfo["right"])
+        self.ui.lineEdit_12.setText(userinfo["bottom"])
+        
     def bp(self):
         global conf
         shutil.rmtree('images')
@@ -749,7 +911,11 @@ class MainWindow(QMainWindow):
                     matrix_file.write("\n")
             matrix_file.close()
             
-            os.system("bin/thermal_conductivity &")
+
+            if(self.ui.spinBox.value()>1):
+                os.system("mpirun -np "+str(self.ui.spinBox.value())+" ./bin/thermal_conductivity")
+            elif(self.ui.spinBox.value()==1):
+                os.system("./bin/thermal_conductivity_1_thread")
             im_number=0
             while(os.path.exists("images/zEND.png") != True):
                 if(os.path.exists(str("images/im"+str(im_number)+".png"))):
@@ -768,16 +934,12 @@ class MainWindow(QMainWindow):
                 append_images=frames[1:],
                 save_all=True,
                 duration=30, loop=0)
-
-            pass
         except:
-            if(self.ui.lineEdit_15.text()=="" or self.ui.lineEdit_14.text()=="" or self.ui.lineEdit.text()=="" or self.ui.lineEdit_2.text()=="" or (self.ui.lineEdit_9.text()=="" and self.ui.lineEdit_3.text()=="") or self.ui.lineEdit_4.text()=="" or self.ui.lineEdit_5.text()=="" or self.ui.lineEdit_6.text()=="" or self.ui.lineEdit_7.text()=="" or self.ui.lineEdit_8.text()==""):
-                pass
-            else:
-                pass
+            if(self.ui.spinBox.value()>1):
+                os.system("mpirun -np "+str(self.ui.spinBox.value())+" ./bin/thermal_conductivity")
+            elif(self.ui.spinBox.value()==1):
+                os.system("./bin/thermal_conductivity_1_thread")
 if __name__ == '__main__':
-    pip.main(['install', 'pillow'])
-    pip.main(['install', 'PySide6'])
     app = QApplication()
     window = MainWindow()
     window.show()

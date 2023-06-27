@@ -7,8 +7,8 @@
 #include <iostream>
 #include <vector>
 
-double get_formula_result(const int i, const int j,std::vector<std::vector<double>> &First_matrix,
-                          const double k1, const double k2, const size_t width, const size_t height){
+double get_formula_result(const int i, const int j,
+                          const double k1, const double k2, const size_t width, const size_t height, std::vector<std::vector<double>> &First_matrix){
     if (i == 0 && j == static_cast<size_t>(width-1)){
         return First_matrix[i][j] +
                (k1 * (First_matrix[i + 1][j] - First_matrix[i][j])) +
